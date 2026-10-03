@@ -8,7 +8,6 @@
   };
   function make(tag,attrs,html){const e=document.createElement(tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(html)e.innerHTML=html;return e}
   function setup(){
-    if(window.innerWidth>900)return;
     const header=document.querySelector('header'); if(!header)return;
     if(!document.querySelector('.printly-menu-btn')){
       const btn=make('button',{class:'printly-menu-btn','aria-label':'Ouvrir le menu'},icons.menu);
@@ -27,7 +26,7 @@
     const items=[['dashboard','Commandes',icons.orders],['customers','Clients',icons.users],['activity','Journal',icons.activity],['users','Équipe',icons.team]];
     items.forEach(([page,label,icon])=>{const b=make('button',{},icon+'<span>'+label+'</span>');b.dataset.page=page;b.onclick=()=>{const target=[...document.querySelectorAll('.desktopNav button')].find(x=>x.textContent.trim().toLowerCase().includes(label.toLowerCase().replace('commandes','dashboard')))||[...document.querySelectorAll('.mobileNav button')].find(x=>x.textContent.trim().toLowerCase().includes(label.toLowerCase()));if(target)target.click();closeDrawer();};nav.appendChild(b);});
     document.body.append(backdrop,drawer);
-    const observer=new MutationObserver(()=>{const active=[...document.querySelectorAll('.mobileNav button')].find(x=>x.classList.contains('active'));const page=active?.textContent?.trim().toLowerCase();nav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===page));});observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']});
+    const observer=new MutationObserver(()=>{const active=[...document.querySelectorAll('.mobileNav button')].find(x=>x.classList.contains('active'))||[...document.querySelectorAll('.desktopNav button')].find(x=>x.classList.contains('active'));const page=active?.textContent?.trim().toLowerCase();nav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===page||((page==='dashboard'||page==='commandes')&&b.dataset.page==='dashboard')));});observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']});
   }
   function openDrawer(){const d=document.querySelector('.printly-drawer'),b=document.querySelector('.printly-drawer-backdrop');if(!d||!b)return;b.style.display='block';requestAnimationFrame(()=>d.classList.add('open'));}
   function closeDrawer(){const d=document.querySelector('.printly-drawer'),b=document.querySelector('.printly-drawer-backdrop');if(!d||!b)return;d.classList.remove('open');setTimeout(()=>b.style.display='none',280);}
