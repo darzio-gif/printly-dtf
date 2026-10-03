@@ -1,0 +1,85 @@
+/* PRINTLY — status carousel
+   Mobile-only presentation layer for the existing kanban/status columns.
+   No data, Supabase, navigation or order logic is changed.
+*/
+
+@media (max-width: 900px) {
+  /* Use the existing six status columns as the mobile carousel. */
+  .mobileBoard.mobileOnly {
+    display: none !important;
+  }
+
+  .kanban.desktopOnly {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    grid-template-columns: none !important;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 10px;
+    padding: 0 0 10px;
+    margin: 0;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    touch-action: pan-x;
+  }
+
+  .kanban.desktopOnly::-webkit-scrollbar {
+    display: none;
+  }
+
+  .kanban.desktopOnly > .column {
+    flex: 0 0 88%;
+    width: 88%;
+    min-width: 88%;
+    max-width: 88%;
+    min-height: 420px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* Keep the existing Printly dark visual language. */
+  .kanban.desktopOnly > .column,
+  .kanban.desktopOnly > .column .card {
+    background-color: #0c0c0d;
+  }
+
+  .kanban.desktopOnly > .column .card {
+    background-color: #151516;
+  }
+
+  /* Prevent any child from creating page-level horizontal overflow. */
+  .kanban.desktopOnly .card,
+  .kanban.desktopOnly .cardTop,
+  .kanban.desktopOnly .clientBtn {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .kanban.desktopOnly .clientBtn,
+  .kanban.desktopOnly .orderLink {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .app,
+  main {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}
+
+@media (min-width: 901px) {
+  /* Desktop keeps the existing six-column kanban layout unchanged. */
+  .kanban.desktopOnly {
+    display: grid;
+  }
+}
