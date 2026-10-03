@@ -2,6 +2,7 @@ import React,{useEffect,useMemo,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {createClient} from '@supabase/supabase-js';
 import './style.css';
+import './activity.css';
 
 const supabase=createClient(import.meta.env.VITE_SUPABASE_URL||'https://gfvvxwdbahakysxnwyxr.supabase.co',import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY||'sb_publishable_D29Cvfa1ie3-AikSpOOsCg_aL97agYL');
 const statuses=[['new','Nouvelle'],['in_progress','En traitement'],['confirmation_pending','Confirmation en attente'],['ready_to_print','Ready to print'],['sent_to_print','Send to print'],['printed','Printed']];
