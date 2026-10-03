@@ -1,0 +1,81 @@
+/* PRINTLY responsive visual bug fixes — loaded last on purpose */
+
+@media (max-width: 900px) {
+  .mobileStatusTabs {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    overflow-x: auto !important;
+    padding: 0 0 12px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    scrollbar-width: none !important;
+  }
+  .mobileStatusTabs::-webkit-scrollbar { display: none !important; }
+  .mobileStatusTabs > button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    flex: 0 0 auto !important;
+    min-height: 40px !important;
+    height: 40px !important;
+    padding: 0 14px !important;
+    border: 1px solid #29292c !important;
+    border-radius: 999px !important;
+    outline: none !important;
+    background: #111214 !important;
+    background-image: none !important;
+    color: #96969b !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+  }
+  .mobileStatusTabs > button.active,
+  .mobileStatusTabs > button[aria-selected="true"] {
+    background: #ff1026 !important;
+    border-color: #ff1026 !important;
+    color: #fff !important;
+    box-shadow: none !important;
+  }
+  .mobileStatusTabs > button::before,
+  .mobileStatusTabs > button::after {
+    content: none !important;
+    display: none !important;
+  }
+  .mobileStatusTabs .skeleton,
+  .mobileStatusTabs [class*="skeleton"],
+  .mobileStatusTabs [class*="loading"] {
+    background: #111214 !important;
+    border-color: #29292c !important;
+    color: transparent !important;
+  }
+  html, body, #root, .app {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .top .primary {
+    width: 58px !important;
+    min-width: 58px !important;
+    height: 58px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    background: #ff1026 !important;
+    color: transparent !important;
+    border-radius: 15px !important;
+  }
+  .top .primary::before {
+    content: "+" !important;
+    display: block !important;
+    color: #fff !important;
+    font-size: 34px !important;
+    line-height: 1 !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobileStatusTabs { display: none !important; }
+}
