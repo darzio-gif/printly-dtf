@@ -1,4 +1,4 @@
-const CACHE = 'printly-shell-v8';
+const CACHE = 'printly-shell-v9';
 const SHELL = ['/', '/manifest.json', '/logo.png', '/mobile-ui.css', '/mobile-ui.js', '/desktop-ui.css', '/desktop-ui.js', '/touch-mobile.css', '/icons.css', '/activity.css'];
 self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())); });
