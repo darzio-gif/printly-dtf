@@ -1,136 +1,131 @@
-/* PRINTLY — mobile "Toutes les commandes" status carousel.
+/* PRINTLY — "Toutes les commandes" status carousel.
    Presentation only: uses the existing six React status columns.
    No data, Supabase, navigation, order or status logic is changed.
+   The same carousel presentation is used on mobile and desktop.
 */
 
-@media (max-width: 900px) {
-  body {
-    overflow-x: hidden !important;
-  }
-
-  .app,
-  main {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow-x: hidden !important;
-  }
-
-  /* The old mobile tabs/list are replaced by the existing six-column board. */
-  .mobileBoard.mobileOnly {
-    display: none !important;
-  }
-
-  .kanban.desktopOnly {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    gap: 12px !important;
-    padding: 0 2px 12px !important;
-    margin: 0 !important;
-    scroll-snap-type: x mandatory !important;
-    scroll-padding-left: 2px;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    touch-action: pan-x;
-  }
-
-  .kanban.desktopOnly::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* One status column per carousel page, with part of the next one visible. */
-  .kanban.desktopOnly > .column {
-    flex: 0 0 88% !important;
-    width: 88% !important;
-    min-width: 88% !important;
-    max-width: 88% !important;
-    min-height: 360px !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 14px !important;
-    border-radius: 18px !important;
-    background: #111214 !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-    scroll-snap-align: start !important;
-    scroll-snap-stop: always;
-    box-shadow: 0 12px 35px rgba(0,0,0,.16);
-  }
-
-  .kanban.desktopOnly > .column .colHead {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 3px 4px 13px !important;
-  }
-
-  .kanban.desktopOnly > .column .colHead b {
-    color: #fff;
-    font-size: 16px;
-    line-height: 1.25;
-  }
-
-  .kanban.desktopOnly > .column .colHead span {
-    min-width: 30px;
-    height: 30px;
-    padding: 0 9px;
-    display: grid;
-    place-items: center;
-    background: #222326;
-    color: #aaa;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  .kanban.desktopOnly > .column .card {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    margin-bottom: 10px !important;
-    padding: 16px !important;
-    background: #151516 !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-    border-radius: 15px !important;
-  }
-
-  .kanban.desktopOnly > .column .cardTop {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .kanban.desktopOnly > .column .orderLink,
-  .kanban.desktopOnly > .column .clientBtn {
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .kanban.desktopOnly > .column .statusSelect {
-    max-width: 58% !important;
-  }
-
-  /* No white loading/skeleton pills. */
-  .kanban.desktopOnly .skeleton,
-  .kanban.desktopOnly .loading,
-  .kanban.desktopOnly [class*="skeleton"] {
-    background: #111214 !important;
-    color: #8a8a8a !important;
-  }
+body {
+  overflow-x: hidden !important;
 }
 
-@media (min-width: 901px) {
-  /* Desktop remains exactly the existing six-column layout. */
-  .kanban.desktopOnly {
-    display: grid;
-  }
+.app,
+main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden !important;
+}
+
+/* Use the existing six status columns as the single source of presentation.
+   The old mobile tabs/list remain unused. */
+.mobileBoard.mobileOnly {
+  display: none !important;
+}
+
+/* Same status carousel on ALL screen sizes. */
+.kanban.desktopOnly {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  gap: 12px !important;
+  padding: 0 2px 12px !important;
+  margin: 0 !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-padding-left: 2px;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+
+.kanban.desktopOnly::-webkit-scrollbar {
+  display: none;
+}
+
+/* One status column per carousel page, with part of the next one visible. */
+.kanban.desktopOnly > .column {
+  flex: 0 0 88% !important;
+  width: 88% !important;
+  min-width: 88% !important;
+  max-width: 88% !important;
+  min-height: 360px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 14px !important;
+  border-radius: 18px !important;
+  background: #111214 !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always;
+  box-shadow: 0 12px 35px rgba(0,0,0,.16);
+  box-sizing: border-box !important;
+}
+
+.kanban.desktopOnly > .column .colHead {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 3px 4px 13px !important;
+}
+
+.kanban.desktopOnly > .column .colHead b {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.kanban.desktopOnly > .column .colHead span {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 9px;
+  display: grid;
+  place-items: center;
+  background: #222326;
+  color: #aaa;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kanban.desktopOnly > .column .card {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin-bottom: 10px !important;
+  padding: 16px !important;
+  background: #151516 !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 15px !important;
+}
+
+.kanban.desktopOnly > .column .cardTop {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.kanban.desktopOnly > .column .orderLink,
+.kanban.desktopOnly > .column .clientBtn {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kanban.desktopOnly > .column .statusSelect {
+  max-width: 58% !important;
+}
+
+/* No white loading/skeleton pills. */
+.kanban.desktopOnly .skeleton,
+.kanban.desktopOnly .loading,
+.kanban.desktopOnly [class*="skeleton"] {
+  background: #111214 !important;
+  color: #8a8a8a !important;
 }
