@@ -1,5 +1,5 @@
-const CACHE = 'printly-shell-v2';
-const SHELL = ['/', '/manifest.json', '/icon.svg'];
+const CACHE = 'printly-shell-v3';
+const SHELL = ['/', '/manifest.json', '/icon.svg', '/icon-192.svg'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
