@@ -23,15 +23,18 @@
     border-radius: 999px !important;
     outline: none !important;
     background: #111214 !important;
+    background-color: #111214 !important;
     background-image: none !important;
     color: #96969b !important;
     box-shadow: none !important;
     text-shadow: none !important;
     opacity: 1 !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   .mobileStatusTabs > button.active,
   .mobileStatusTabs > button[aria-selected="true"] {
     background: #ff1026 !important;
+    background-color: #ff1026 !important;
     border-color: #ff1026 !important;
     color: #fff !important;
     box-shadow: none !important;
@@ -41,12 +44,19 @@
     content: none !important;
     display: none !important;
   }
+  .mobileStatusTabs > button > *,
+  .mobileStatusTabs > button > b {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
   .mobileStatusTabs .skeleton,
   .mobileStatusTabs [class*="skeleton"],
   .mobileStatusTabs [class*="loading"] {
     background: #111214 !important;
+    background-color: #111214 !important;
     border-color: #29292c !important;
-    color: transparent !important;
+    color: #96969b !important;
   }
   html, body, #root, .app {
     max-width: 100%;
@@ -64,6 +74,7 @@
     padding: 0 !important;
     font-size: 0 !important;
     background: #ff1026 !important;
+    background-color: #ff1026 !important;
     color: transparent !important;
     border-radius: 15px !important;
   }
@@ -73,6 +84,25 @@
     color: #fff !important;
     font-size: 34px !important;
     line-height: 1 !important;
+  }
+
+  /* Prevent native/browser styles from ever creating white status pills. */
+  button.mobileStatusTab,
+  .mobileStatusTabs button,
+  .mobileStatusTabs button:focus,
+  .mobileStatusTabs button:active {
+    color: #96969b !important;
+    background: #111214 !important;
+    background-color: #111214 !important;
+    border-color: #29292c !important;
+  }
+  .mobileStatusTabs button.active,
+  .mobileStatusTabs button.active:focus,
+  .mobileStatusTabs button.active:active {
+    color: #fff !important;
+    background: #ff1026 !important;
+    background-color: #ff1026 !important;
+    border-color: #ff1026 !important;
   }
 }
 
