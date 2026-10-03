@@ -1,12 +1,4 @@
 .dangerZone{margin:16px 0;padding:14px;border:1px solid #5b2026;background:#210d10;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:12px}.dangerZone div{display:flex;flex-direction:column;gap:4px}.dangerZone small{color:#999}.dangerButton{border:1px solid #8b1d28;background:#6d0d17;color:#fff;border-radius:9px;padding:10px 13px;font-weight:750}.dangerButton:hover{background:#a30f1d}.activityList{display:grid;gap:8px}.activityRow{display:flex;gap:12px;align-items:flex-start;background:#111;border:1px solid #242424;border-radius:12px;padding:13px}.activityIcon{width:36px;height:36px;flex:none;border-radius:10px;background:#22090d;display:grid;place-items:center}.activityBody{display:flex;flex-direction:column;gap:3px;min-width:0}.activityBody b{font-size:14px}.activityBody span{color:#bbb}.activityBody small{color:#aaa}.activityBody em{font-style:normal;color:#666;font-size:12px}.error{display:flex;justify-content:space-between;gap:10px;align-items:center}.error button{border:0;background:transparent;color:#aaa;font-size:18px}@media(max-width:560px){.dangerZone{align-items:stretch;flex-direction:column}.dangerButton{width:100%}.activityRow{padding:11px}.activityIcon{width:32px;height:32px}.activityBody b{font-size:13px}.activityBody span,.activityBody small,.activityBody em{font-size:11px}}.sideNav{height:auto!important;border:0!important;background:transparent!important;padding:18px 0 0!important}.sidebar .sideNav{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important}.sidebar .sideNav button{height:48px!important;min-height:48px!important;padding:0 13px!important;border-bottom:0!important}.sidebar .sideNav button svg{width:21px;height:21px}.sidebarBrand{flex:none}.sidebarBottom{flex:none}.legacyNav{display:none!important}.sideExtra{display:none!important}
 
-/* Restore the original desktop "Toutes les commandes" status-board presentation. */
-@media(min-width:901px){
-  .kanban{grid-template-columns:repeat(6,minmax(220px,1fr));gap:12px;margin-top:8px;align-items:start}
-  .kanban::before{content:"Toutes les commandes";grid-column:1/-1;font-size:24px;font-weight:800;color:#fff;margin:2px 0 2px 2px;line-height:1.2}
-  .column{min-height:420px;background:#0c0c0d;border:1px solid #222;border-radius:15px;padding:10px}
-  .colHead{min-height:42px;padding:8px 6px 12px;color:#ddd}
-  .colHead b{font-size:14px}
-  .colHead span{background:#222;border-radius:99px;padding:4px 9px;color:#aaa;min-width:26px;text-align:center}
-}
-@media(max-width:900px){.kanban::before{display:none}}
+/* Desktop board sizing is handled by desktop-ui.css so it matches the reference: three status cards per row and a horizontally scrollable status board. */
+@media(max-width:900px){.kanban::before{display:none!important}}
