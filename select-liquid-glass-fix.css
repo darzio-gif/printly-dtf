@@ -1,0 +1,47 @@
+/* PRINTLY — native select dark/liquid-glass fix */
+:root { color-scheme: dark; }
+
+select,
+.statusSelect,
+select.statusSelect {
+  color-scheme: dark !important;
+  appearance: auto;
+  -webkit-appearance: auto;
+  background-color: #17181d !important;
+  color: #f5f5f7 !important;
+  border-color: rgba(255,255,255,.12) !important;
+  caret-color: #fff;
+}
+
+select option,
+.statusSelect option {
+  background-color: #17181d !important;
+  color: #f5f5f7 !important;
+}
+
+select option:checked,
+.statusSelect option:checked {
+  background: #2b2d33 !important;
+  color: #fff !important;
+}
+
+select:focus,
+.statusSelect:focus {
+  outline: none !important;
+  border-color: rgba(255,23,48,.9) !important;
+  box-shadow: 0 0 0 2px rgba(255,23,48,.18) !important;
+}
+
+/* Prevent the focused select from visually swallowing the card content. */
+.card .statusSelect {
+  position: relative;
+  z-index: 3;
+  min-height: 44px;
+}
+
+@media (max-width: 640px) {
+  .card .statusSelect {
+    min-height: 44px;
+    font-size: .9rem;
+  }
+}
