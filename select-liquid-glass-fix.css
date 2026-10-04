@@ -1,4 +1,4 @@
-/* PRINTLY — native select dark/liquid-glass fix */
+/* PRINTLY — native select + order-card layout fix */
 :root { color-scheme: dark; }
 
 select,
@@ -11,6 +11,8 @@ select.statusSelect {
   color: #f5f5f7 !important;
   border-color: rgba(255,255,255,.12) !important;
   caret-color: #fff;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 select option,
@@ -32,11 +34,48 @@ select:focus,
   box-shadow: 0 0 0 2px rgba(255,23,48,.18) !important;
 }
 
-/* Prevent the focused select from visually swallowing the card content. */
+/* Keep the status select inside its order card. */
+.card .cardTop {
+  min-width: 0;
+  align-items: center;
+}
+
+.card .orderLink,
+.card .statusSelect {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 .card .statusSelect {
   position: relative;
   z-index: 3;
+  width: min(155px, 100%);
+  max-width: 155px;
   min-height: 44px;
+  flex: 0 1 155px;
+}
+
+/* Kanban columns become narrow on tablet/mobile. Stack the number and
+   status control so the select can never escape the card bounds. */
+@media (max-width: 1024px) {
+  .kanban .card .cardTop {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+
+  .kanban .card .orderLink {
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .kanban .card .statusSelect {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    flex: none;
+  }
 }
 
 @media (max-width: 640px) {
