@@ -1,0 +1,21 @@
+/* Final responsive QA overrides: no page-level horizontal scrolling */
+html,body,#root,.app{max-width:100%;overflow-x:hidden}
+.mobileStatusTabs{display:flex;flex-wrap:wrap;overflow:visible!important;white-space:normal!important;gap:.5rem}
+.mobileStatusTabs button{flex:1 1 auto;min-width:44px}
+.mobileBoard{width:100%;max-width:100%;overflow:visible!important}
+.mobileColumn{width:100%;max-width:100%;min-width:0;overflow:hidden}
+.customer,.userRow,.customerOrders button,.card,.info{min-width:0;overflow-wrap:anywhere}
+.cardTop,.top,.modalHead{min-width:0}
+@media (max-width:639px){
+  .mobileStatusTabs button{flex:1 1 calc(50% - .5rem)}
+  .mobileColumn{border-radius:1rem}
+}
+@media (min-width:640px) and (max-width:1023px){
+  .mobileStatusTabs button{flex:0 1 auto}
+}
+@media (min-width:1536px){
+  main{width:min(calc(100% - 23rem),1800px);margin-inline-start:20rem;margin-inline-end:2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .mobileStatusTabs,.mobileColumn{scroll-behavior:auto!important}
+}
