@@ -1,203 +1,182 @@
-/* PRINTLY — "Toutes les commandes" responsive status carousel.
-   Presentation only: uses the existing six React status columns.
-   No data, Supabase, navigation, order or status logic is changed.
-*/
+/* PRINTLY — Toutes les commandes: one horizontal status carousel on EVERY screen size.
+   Presentation only. Do not change data, Supabase, navigation or status logic. */
 
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden !important;
-}
-
-.app,
-main {
-  width: 100%;
+html, body, #root, .app, main {
   max-width: 100%;
   min-width: 0;
   overflow-x: hidden !important;
 }
 
-/* The existing six status columns are the single source of presentation. */
+/* There must be only one status board. */
 .mobileBoard.mobileOnly {
   display: none !important;
 }
 
-/* One consistent carousel on phone, tablet, laptop and large desktop. */
+/* The six existing status columns are the carousel items. */
 .kanban.desktopOnly {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: stretch !important;
+  justify-content: flex-start !important;
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 0 2px 14px !important;
+  box-sizing: border-box !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
-  gap: clamp(10px, 1.2vw, 16px) !important;
-  padding: 0 2px 14px !important;
-  margin: 0 !important;
   scroll-snap-type: x mandatory !important;
-  scroll-padding-left: 2px;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  touch-action: pan-x;
+  scroll-padding-left: 2px !important;
+  overscroll-behavior-x: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  touch-action: pan-x !important;
 }
 
 .kanban.desktopOnly::-webkit-scrollbar {
-  display: none;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
-/*
-  Responsive column width:
-  - phones: about 88vw, so the next column peeks in
-  - tablets: grows naturally with the viewport
-  - desktop: capped so cards never become excessively wide
-*/
+/* IMPORTANT: override the old desktop grid/340px-column rules.
+   Every viewport uses the same 88% carousel behavior as mobile. */
 .kanban.desktopOnly > .column {
-  flex: 0 0 clamp(280px, 88vw, 520px) !important;
-  width: clamp(280px, 88vw, 520px) !important;
-  min-width: clamp(280px, 88vw, 520px) !important;
-  max-width: 520px !important;
-  min-height: clamp(300px, 58vh, 620px) !important;
+  flex: 0 0 88% !important;
+  width: 88% !important;
+  min-width: 88% !important;
+  max-width: 88% !important;
   height: auto !important;
+  min-height: 420px !important;
   margin: 0 !important;
-  padding: clamp(12px, 1.5vw, 18px) !important;
-  border-radius: clamp(16px, 1.5vw, 20px) !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  border-radius: 18px !important;
   background: #111214 !important;
+  background-image: none !important;
   border: 1px solid rgba(255,255,255,.08) !important;
   scroll-snap-align: start !important;
-  scroll-snap-stop: always;
-  box-shadow: 0 12px 35px rgba(0,0,0,.16);
-  box-sizing: border-box !important;
+  scroll-snap-stop: always !important;
+  box-shadow: none !important;
 }
 
 .kanban.desktopOnly > .column .colHead {
   display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  min-width: 0;
-  padding: 3px 4px clamp(11px, 1.2vw, 15px) !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  min-width: 0 !important;
+  padding: 2px 2px 14px !important;
+  margin: 0 !important;
 }
 
 .kanban.desktopOnly > .column .colHead b {
-  min-width: 0;
-  color: #fff;
-  font-size: clamp(14px, 1.15vw, 17px);
-  line-height: 1.3;
-  overflow-wrap: anywhere;
+  min-width: 0 !important;
+  max-width: calc(100% - 42px) !important;
+  color: #fff !important;
+  font-size: 17px !important;
+  line-height: 1.25 !important;
+  overflow-wrap: anywhere !important;
 }
 
 .kanban.desktopOnly > .column .colHead span {
-  flex: 0 0 auto;
-  min-width: 30px;
-  height: 30px;
-  padding: 0 9px;
-  display: grid;
-  place-items: center;
-  background: #222326;
-  color: #aaa;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
+  flex: 0 0 auto !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  padding: 0 9px !important;
+  display: grid !important;
+  place-items: center !important;
+  box-sizing: border-box !important;
+  background: #222326 !important;
+  color: #aaa !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
 }
 
 .kanban.desktopOnly > .column .card {
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
-  margin-bottom: 10px !important;
-  padding: clamp(13px, 1.25vw, 17px) !important;
-  background: #151516 !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-  border-radius: clamp(13px, 1.2vw, 16px) !important;
   box-sizing: border-box !important;
+  margin: 0 0 10px !important;
+  padding: 16px !important;
+  background: #151516 !important;
+  background-image: none !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
 }
 
-.kanban.desktopOnly > .column .cardTop {
-  min-width: 0;
-  max-width: 100%;
-  flex-wrap: wrap;
+.kanban.desktopOnly > .column .cardTop,
+.kanban.desktopOnly > .column .orderLink,
+.kanban.desktopOnly > .column .clientBtn {
+  min-width: 0 !important;
+  max-width: 100% !important;
 }
 
 .kanban.desktopOnly > .column .orderLink,
 .kanban.desktopOnly > .column .clientBtn {
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .kanban.desktopOnly > .column .statusSelect {
-  max-width: min(58%, 220px) !important;
-  min-width: 0;
+  max-width: 58% !important;
 }
 
-/* Prevent long names/phone numbers from breaking the layout. */
-.kanban.desktopOnly > .column * {
-  min-width: 0;
-}
-
-/* No white loading/skeleton pills. */
+/* No white skeletons / loading pills. */
 .kanban.desktopOnly .skeleton,
 .kanban.desktopOnly .loading,
-.kanban.desktopOnly [class*="skeleton"] {
+.kanban.desktopOnly [class*="skeleton"],
+.kanban.desktopOnly [class*="loading"] {
   background: #111214 !important;
+  background-color: #111214 !important;
   color: #8a8a8a !important;
 }
 
-/* Compact phones. */
-@media (max-width: 560px) {
+/* Mobile: keep one main card + a visible slice of the next card. */
+@media (max-width: 900px) {
   .kanban.desktopOnly {
-    gap: 10px !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    gap: 12px !important;
+    padding-bottom: 12px !important;
   }
 
   .kanban.desktopOnly > .column {
-    flex-basis: 88vw !important;
-    width: 88vw !important;
-    min-width: 88vw !important;
-    max-width: 88vw !important;
-    min-height: 320px !important;
-  }
-
-  .kanban.desktopOnly > .column .statusSelect {
-    max-width: 55% !important;
+    flex-basis: 88% !important;
+    width: 88% !important;
+    min-width: 88% !important;
+    max-width: 88% !important;
+    min-height: 360px !important;
+    padding: 14px !important;
   }
 }
 
-/* Small tablets / portrait tablets. */
-@media (min-width: 561px) and (max-width: 900px) {
-  .kanban.desktopOnly > .column {
-    flex-basis: 78vw !important;
-    width: 78vw !important;
-    min-width: 78vw !important;
-    max-width: 520px !important;
-  }
-}
-
-/* Desktop and laptop: keep the same carousel, but use a practical card width. */
+/* Desktop: SAME carousel as mobile, but cap the card width on very wide screens
+   so a 4K/ultrawide monitor does not create an enormous status column. */
 @media (min-width: 901px) {
   .kanban.desktopOnly {
-    padding-right: 8px !important;
+    gap: 16px !important;
   }
 
   .kanban.desktopOnly > .column {
-    flex-basis: clamp(360px, 38vw, 520px) !important;
-    width: clamp(360px, 38vw, 520px) !important;
-    min-width: clamp(360px, 38vw, 520px) !important;
-    max-width: 520px !important;
+    flex: 0 0 min(88%, 920px) !important;
+    width: min(88%, 920px) !important;
+    min-width: min(88%, 920px) !important;
+    max-width: min(88%, 920px) !important;
+    min-height: 520px !important;
   }
 }
 
-/* Very wide screens: never stretch individual columns excessively. */
 @media (min-width: 1800px) {
   .kanban.desktopOnly > .column {
-    flex-basis: 500px !important;
-    width: 500px !important;
-    min-width: 500px !important;
+    flex-basis: min(72%, 920px) !important;
+    width: min(72%, 920px) !important;
+    min-width: min(72%, 920px) !important;
+    max-width: min(72%, 920px) !important;
   }
 }
