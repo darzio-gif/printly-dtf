@@ -141,7 +141,7 @@ export default function TeamChat({me,profiles,orders,onClose}){
   const otherProfiles=(profiles||[]).filter(p=>p.id!==me.id);
 
   return <div className="teamChatOverlay">
-    <section className="teamChatWindow" role="dialog" aria-modal="true" aria-label="Team Chat">
+    <section className={"teamChatWindow "+(selectedRoom?"mobileHasRoom":"")} role="dialog" aria-modal="true" aria-label="Team Chat">
       <header className="teamChatHeader">
         <div className="teamChatTitle"><div className="teamChatLogo">💬</div><div><strong>Team Chat</strong><small>Communication interne · Printly</small></div></div>
         <button className="teamChatClose" onClick={onClose} aria-label="Fermer">×</button>
