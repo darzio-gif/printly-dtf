@@ -96,3 +96,11 @@ main{width:100%;max-width:1800px;margin:0 auto;padding:calc(var(--header) + 30px
  .teamChatConversation{position:absolute;inset:64px 0 0;background:#101012}
  .teamChatRoomTools{padding:10px}
 }
+
+.chatBackMobile{display:none}
+@media(max-width:680px){
+ .teamChatWindow.mobileHasRoom .teamChatRooms{display:none}
+ .teamChatWindow.mobileHasRoom .teamChatConversation{display:flex}
+ .chatBackMobile{display:grid;place-items:center;width:32px;height:32px;margin-right:8px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.04);color:#ddd;font-size:23px;cursor:pointer}
+ .teamChatConversationHead{padding-left:10px}
+}
