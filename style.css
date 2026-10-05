@@ -18,3 +18,81 @@ main{width:100%;max-width:1800px;margin:0 auto;padding:calc(var(--header) + 30px
 @media (max-width:639px){.top{align-items:flex-start}.top h2{font-size:24px}.top p{font-size:11px}.top .primary{font-size:0;width:46px;height:46px;padding:0}.top .primary:after{content:'+';font-size:26px}.orderSections .sectionTab{min-height:58px}.stat{min-height:98px;padding:14px}.stat strong{font-size:23px}.stat span{font-size:10px}.mobileColumn{min-height:400px}.cardTop{align-items:flex-start}.statusSelect{max-width:145px}.detailGrid,.customerStats{grid-template-columns:1fr}.customerOrders button{grid-template-columns:54px 1fr}.customerOrders small{grid-column:2}.dangerZone{flex-direction:column;align-items:stretch}.dangerButton{width:100%}}
 @media (max-width:359px){main{padding-inline:10px}.stats{gap:7px}.stat{padding:12px}.sectionTab{padding-inline:11px}.logoutTop{padding-inline:8px}.brand span{font-size:14px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* ===== Printly Team Chat ===== */
+.chatHeaderButton{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 13px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.045);color:var(--text);font:700 12px Manrope;cursor:pointer;transition:.18s}
+.chatHeaderButton:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);transform:translateY(-1px)}
+.chatSideButton{position:relative}
+.chatSideButton:after{content:'NEW';margin-left:auto;font-size:8px;letter-spacing:.08em;padding:3px 6px;border-radius:6px;background:var(--red);color:#fff;font-weight:800}
+.teamChatOverlay{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:flex-end;padding:22px 22px 22px 310px;animation:chatFade .18s ease}
+.teamChatWindow{width:min(1040px,calc(100vw - 332px));height:min(720px,calc(100vh - 44px));min-height:520px;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(145deg,rgba(25,25,28,.98),rgba(12,12,14,.99));box-shadow:0 30px 100px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.025);animation:chatUp .22s ease}
+.teamChatHeader{height:72px;flex:0 0 72px;display:flex;align-items:center;justify-content:space-between;padding:0 18px 0 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.025)}
+.teamChatTitle,.conversationIdentity{display:flex;align-items:center;gap:11px}
+.teamChatLogo{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:var(--redsoft);border:1px solid rgba(255,23,48,.2);font-size:20px}
+.teamChatTitle strong{display:block;font:800 16px Manrope}.teamChatTitle small{display:block;margin-top:2px;color:var(--muted);font-size:10px}
+.teamChatClose{width:38px;height:38px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.04);color:var(--muted);font-size:24px;line-height:1;cursor:pointer}
+.teamChatClose:hover{color:#fff;background:rgba(255,255,255,.08)}
+.teamChatBody{min-height:0;flex:1;display:grid;grid-template-columns:285px 1fr}
+.teamChatRooms{min-width:0;border-right:1px solid var(--line);background:rgba(255,255,255,.018);display:flex;flex-direction:column}
+.teamChatRoomTools{padding:12px;display:flex;gap:7px;border-bottom:1px solid var(--line)}
+.teamChatSearch{height:40px;flex:1;display:flex;align-items:center;gap:7px;padding:0 11px;border:1px solid var(--line);border-radius:11px;background:rgba(0,0,0,.2)}
+.teamChatSearch span{font-size:18px;color:var(--muted)}.teamChatSearch input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:11px}
+.teamChatNew{width:40px;height:40px;border:1px solid rgba(255,23,48,.25);border-radius:11px;background:var(--redsoft);color:#fff;font-size:20px;cursor:pointer}
+.teamChatRoomList{padding:7px;overflow:auto;flex:1}
+.teamChatRoom{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:1px solid transparent;border-radius:13px;background:transparent;color:var(--text);text-align:left;cursor:pointer;margin-bottom:3px}
+.teamChatRoom:hover{background:rgba(255,255,255,.045)}.teamChatRoom.active{background:rgba(255,23,48,.08);border-color:rgba(255,23,48,.18)}
+.chatAvatar{width:39px;height:39px;flex:0 0 39px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-size:11px;font-weight:800;color:#fff}
+.chatAvatar.general{background:var(--redsoft);border-color:rgba(255,23,48,.2)}
+.chatAvatar.small{width:31px;height:31px;flex-basis:31px;border-radius:10px;font-size:9px;align-self:flex-end}
+.roomCopy{min-width:0;flex:1}.roomCopy b,.roomCopy small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.roomCopy b{font:700 12px Manrope}.roomCopy small{margin-top:3px;color:var(--muted);font-size:9px}
+.teamChatRoom em{min-width:21px;height:21px;display:grid;place-items:center;padding:0 5px;border-radius:8px;background:var(--red);color:#fff;font:800 9px Manrope;font-style:normal}
+.teamChatMemberPicker{position:absolute;z-index:5;width:270px;margin:58px 0 0 12px;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:#171719;box-shadow:0 20px 50px rgba(0,0,0,.45);padding:7px}
+.pickerTitle{padding:8px 9px 6px;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.teamChatMemberPicker button{width:100%;display:flex;align-items:center;gap:9px;padding:8px;border:0;border-radius:10px;background:transparent;color:var(--text);text-align:left;cursor:pointer}.teamChatMemberPicker button:hover{background:rgba(255,255,255,.06)}
+.teamChatMemberPicker button span:last-child{min-width:0}.teamChatMemberPicker b,.teamChatMemberPicker small{display:block}.teamChatMemberPicker b{font-size:11px}.teamChatMemberPicker small{margin-top:2px;color:var(--muted);font-size:9px}
+.teamChatConversation{min-width:0;display:flex;flex-direction:column;background:radial-gradient(circle at 75% 0%,rgba(255,23,48,.06),transparent 34%)}
+.teamChatConversationHead{height:66px;flex:0 0 66px;display:flex;align-items:center;padding:0 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
+.conversationIdentity strong{display:block;font:800 13px Manrope}.conversationIdentity small{display:block;margin-top:2px;color:var(--muted);font-size:9px}
+.teamChatMessages{min-height:0;flex:1;overflow:auto;padding:18px 20px 8px}
+.chatMessageRow{display:flex;gap:8px;max-width:78%;margin:4px 0}.chatMessageRow.own{margin-left:auto;justify-content:flex-end}
+.chatBubbleWrap{display:flex;flex-direction:column;align-items:flex-start;min-width:0}.chatMessageRow.own .chatBubbleWrap{align-items:flex-end}
+.chatSender{margin:0 7px 3px;color:var(--muted);font-size:9px}
+.chatBubble{padding:9px 12px;border:1px solid var(--line);border-radius:15px 15px 15px 5px;background:rgba(255,255,255,.055);color:var(--text);font-size:12px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.chatMessageRow.own .chatBubble{border-color:rgba(255,23,48,.25);border-radius:15px 15px 5px 15px;background:var(--redsoft)}
+.chatTime{margin:3px 7px 0;color:#777;font-size:8px}
+.chatOrderLink{margin-top:4px;padding:5px 8px;border:1px solid rgba(255,255,255,.08);border-radius:8px;background:rgba(255,255,255,.03);color:#bbb;font-size:9px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chatDate{display:flex;align-items:center;gap:8px;margin:14px 0;color:#666;font-size:8px}.chatDate:before,.chatDate:after{content:'';height:1px;flex:1;background:var(--line)}.chatDate span{padding:0 5px}
+.chatWelcome{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--muted);gap:6px;padding:30px}.chatWelcome div{font-size:40px;margin-bottom:5px}.chatWelcome strong{color:var(--text);font:800 15px Manrope}.chatWelcome span{max-width:340px;font-size:10px;line-height:1.6}
+.teamChatComposer{padding:10px 14px 11px;border-top:1px solid var(--line);background:rgba(0,0,0,.18)}
+.chatComposerTools{display:flex;align-items:center;gap:6px;margin-bottom:6px}.chatComposerTools button{width:31px;height:28px;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.04);color:#ccc;cursor:pointer}.chatComposerTools select{max-width:270px;height:28px;border:1px solid var(--line);border-radius:8px;background:#161618;color:#aaa;font-size:9px;padding:0 8px;outline:0}
+.chatComposerInput{display:flex;gap:8px;align-items:flex-end}.chatComposerInput textarea{width:100%;min-height:43px;max-height:120px;resize:vertical;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.04);color:var(--text);outline:0;font:500 12px Manrope;line-height:1.45}.chatComposerInput textarea:focus{border-color:rgba(255,23,48,.35)}
+.chatSend{width:44px;height:43px;flex:0 0 44px;border:0;border-radius:13px;background:var(--red);color:#fff;font-size:18px;cursor:pointer}.chatSend:disabled{opacity:.35;cursor:not-allowed}
+.chatHint{display:block;margin:5px 3px 0;color:#666;font-size:8px}.chatError{margin-top:5px;padding:6px 8px;border-radius:8px;background:rgba(255,23,48,.08);color:#ff8995;font-size:9px}
+.chatEmpty{display:grid;place-items:center;height:100%;color:#666;font-size:10px;padding:30px;text-align:center}
+@keyframes chatFade{from{opacity:0}to{opacity:1}}@keyframes chatUp{from{opacity:0;transform:translateY(15px) scale(.99)}to{opacity:1;transform:none}}
+@media(max-width:900px){
+ .teamChatOverlay{padding:10px}
+ .teamChatWindow{width:100%;height:calc(100vh - 20px);min-height:0}
+ .teamChatBody{grid-template-columns:240px 1fr}
+}
+@media(max-width:680px){
+ .teamChatOverlay{padding:0}
+ .teamChatWindow{height:100dvh;border-radius:0;border:0}
+ .teamChatBody{grid-template-columns:1fr}
+ .teamChatRooms{border-right:0}
+ .teamChatConversation{display:none}
+ .teamChatWindow.chatMobileConversation .teamChatConversation{display:flex}
+ .teamChatRoomList{max-height:none}
+ .chatHeaderButton span{display:none}
+ .teamChatMessages{padding-inline:12px}
+ .chatMessageRow{max-width:88%}
+}
+@media(max-width:520px){
+ .teamChatHeader{height:64px;flex-basis:64px}
+ .teamChatTitle small{display:none}
+ .teamChatBody{display:block}
+ .teamChatRooms{height:100%}
+ .teamChatConversation{position:absolute;inset:64px 0 0;background:#101012}
+ .teamChatRoomTools{padding:10px}
+}
