@@ -1,9 +1,9 @@
 {
-  "id": "/",
-  "name": "PRINTLY — DTF / UV Order Manager",
-  "short_name": "PRINTLY",
-  "description": "Gestion des commandes DTF / UV de Printly",
-  "start_url": "/",
+  "id": "/?app=printly",
+  "name": "Printelly Dz — DTF / UV Order Manager",
+  "short_name": "Printelly Dz",
+  "description": "Gestion des commandes DTF / UV de Printelly Dz",
+  "start_url": "/?app=printly",
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
@@ -13,16 +13,22 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
       "src": "/logo.png",
-      "sizes": "512x512",
+      "sizes": "1254x1254",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
