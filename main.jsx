@@ -13,7 +13,7 @@ const workflowRoles=new Set(['designer','graphiste']);
 const canFullAccess=role=>fullAccessRoles.has(role);
 const statusRank={new:0,in_progress:1,confirmation_pending:2,ready_to_print:3,sent_to_print:4,printed:5};
 const canDeleteOrder=(role,status)=>canFullAccess(role)||(workflowRoles.has(role)&&statusRank[status??'new']<=statusRank.sent_to_print);
-const canChangeStatus=(role,current,next)=>{if(canFullAccess(role))return true;if(workflowRoles.has(role))return statusRank[next]>=statusRank[current]&&statusRank[next]<=statusRank.sent_to_print;if(role==='print_operator')return current==='sent_to_print'&&next==='printed';return false};
+const canChangeStatus=(role,current,next)=>{if(canFullAccess(role))return true;if(workflowRoles.has(role))return statusRank[next]<=statusRank.sent_to_print;if(role==='print_operator')return current==='sent_to_print'&&next==='printed';return false};
 const statusLabel=s=>statuses.find(x=>x[0]===s)?.[1]||s||'—';
 const fmtDate=d=>d?new Date(d).toLocaleString('fr-FR',{dateStyle:'medium',timeStyle:'short'}):'—';
 const uiTranslations={
