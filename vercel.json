@@ -1,5 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/logo.png", "destination": "/printly-logo.svg" }
-  ]
+  "rewrites": []
 }
