@@ -65,8 +65,8 @@ function localizePage(lang){
     const key=raw.trim();
     if(!key)continue;
     const translated=dict[key];
-    if(translated!==undefined)n.nodeValue=raw.replace(key,translated);
-    else if(lang==='fr')n.nodeValue=raw;
+    if(translated!==undefined){const next=raw.replace(key,translated);if(n.nodeValue!==next)n.nodeValue=next;}
+    
   }
   root.querySelectorAll('input,textarea,button,select,[aria-label],[title]').forEach(el=>{
     ['placeholder','aria-label','title'].forEach(attr=>{
