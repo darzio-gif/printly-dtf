@@ -16,6 +16,71 @@ const canDeleteOrder=(role,status)=>canFullAccess(role)||(workflowRoles.has(role
 const canChangeStatus=(role,current,next)=>{if(canFullAccess(role))return true;if(workflowRoles.has(role))return statusRank[next]>=statusRank[current]&&statusRank[next]<=statusRank.sent_to_print;if(role==='print_operator')return current==='sent_to_print'&&next==='printed';return false};
 const statusLabel=s=>statuses.find(x=>x[0]===s)?.[1]||s||'—';
 const fmtDate=d=>d?new Date(d).toLocaleString('fr-FR',{dateStyle:'medium',timeStyle:'short'}):'—';
+const uiTranslations={
+  ar:{
+    'Commandes':'الطلبات','Clients':'العملاء','Journal':'السجل','Old School':'العملاء القدامى','Paramètres':'الإعدادات','Équipe':'الفريق','Stock & Produits':'المخزون والمنتجات','Déconnexion':'تسجيل الخروج','Team Chat':'دردشة الفريق',
+    'Rechercher client, téléphone, commande...':'البحث عن عميل، هاتف، طلب...','Dashboard':'لوحة التحكم','Utilisateurs':'المستخدمون',
+    'Nouvelle commande':'طلب جديد','En traitement':'قيد المعالجة','Confirmation en attente':'في انتظار التأكيد','Ready to print':'جاهز للطباعة','Send to print':'إرسال للطباعة','Printed':'تمت الطباعة','Nouvelle':'جديد',
+    'Tous les statuts':'كل الحالات','Tous les responsables':'كل المسؤولين','Commandes':'الطلبات','Rechercher dans le journal...':'البحث في السجل...','Toutes les opérations':'كل العمليات',
+    'Profils clients enregistrés':'ملفات العملاء المسجلة','Nombre de commandes':'عدد الطلبات','Commandes actuelles':'الطلبات الحالية','Commandes terminées':'الطلبات المكتملة','Dernière commande':'آخر طلب','Historique des commandes':'سجل الطلبات',
+    'Nouveau client':'عميل جديد','Créer le client':'إنشاء العميل','Nom du client':'اسم العميل','Numéro de téléphone':'رقم الهاتف','Notes':'ملاحظات','Créer la commande':'إنشاء الطلب','Nom de la commande':'اسم الطلب','Type de commande':'نوع الطلب',
+    'Enregistrer':'حفظ','Modifier':'تعديل','Supprimer':'حذف','Annuler':'إلغاء','Terminé':'تم','Langue':'اللغة','Choisissez la langue de l’interface.':'اختر لغة الواجهة.','Personnalisez votre espace de travail.':'خصّص مساحة العمل الخاصة بك.','La langue sélectionnée est mémorisée sur cet appareil.':'سيتم حفظ اللغة المختارة على هذا الجهاز.',
+    'Français':'الفرنسية','العربية':'العربية','English':'الإنجليزية','Se connecter':'تسجيل الدخول','Mot de passe':'كلمة المرور','Email':'البريد الإلكتروني','Connexion…':'جارٍ تسجيل الدخول…',
+    'Journal des activités':'سجل النشاطات','Historique des opérations effectuées dans Printelly Dz':'سجل العمليات المنفذة في Printelly Dz','Aucune opération trouvée.':'لم يتم العثور على عمليات.','Chargement…':'جارٍ التحميل…',
+    'Équipe':'الفريق','Utilisateurs Printly et rôles attribués.':'مستخدمو Printly والأدوار المعيّنة.','utilisateur(s)':'مستخدم',
+    'Clients enregistrés manuellement pour les anciennes commandes.':'العملاء المسجلون يدوياً للطلبات القديمة.','+ Ajouter un client':'+ إضافة عميل','Aucun client Old School pour le moment.':'لا يوجد عملاء قدامى حالياً.','Fiche client':'ملف العميل','Nom / Société':'الاسم / الشركة','Téléphone':'الهاتف','Adresse':'العنوان','Aucune adresse renseignée':'لم يتم إدخال عنوان','Aucune note':'لا توجد ملاحظات','Client depuis':'العميل منذ','Type':'النوع','Old School':'قديم','Modifier le client Old School':'تعديل العميل القديم','Nouveau client Old School':'عميل قديم جديد','Enregistrer les modifications':'حفظ التعديلات',
+    'Responsable':'المسؤول','Modifier le statut':'تعديل الحالة','Historique des statuts':'سجل الحالات','Aucun changement enregistré.':'لا توجد تغييرات مسجلة.','Supprimer la commande':'حذف الطلب','Supprimer définitivement la commande':'حذف الطلب نهائياً','Supprimer définitivement le client':'حذف العميل نهائياً',
+    'Commande créée':'تم إنشاء الطلب','Statut modifié':'تم تغيير الحالة','Responsable modifié':'تم تغيير المسؤول','Mètres modifiés':'تم تعديل الأمتار','Commande supprimée':'تم حذف الطلب',
+    'Commande':'الطلب','Téléphone':'الهاتف','Créée le':'تاريخ الإنشاء','Statut':'الحالة','Mètres client':'أمتار العميل','Mètres imprimés':'الأمتار المطبوعة',
+    'Aucun client Old School pour le moment.':'لا يوجد عملاء قدامى حالياً.','Client existant :':'عميل موجود:','son profil sera réutilisé.':'سيتم استخدام ملفه.',
+    'Responsable automatique :':'المسؤول تلقائياً:','Combien de mètres a le client pour cette commande ?':'كم عدد الأمتار الخاصة بالعميل لهذا الطلب؟','Combien de mètres ont réellement été imprimés ?':'كم عدد الأمتار التي تمت طباعتها فعلياً؟','mètres':'أمتار','Enregistrer et changer le statut':'حفظ وتغيير الحالة'
+  },
+  en:{
+    'Commandes':'Orders','Clients':'Clients','Journal':'Activity','Old School':'Legacy Clients','Paramètres':'Settings','Équipe':'Team','Stock & Produits':'Stock & Products','Déconnexion':'Log out','Team Chat':'Team Chat',
+    'Rechercher client, téléphone, commande...':'Search client, phone, order...','Dashboard':'Dashboard','Utilisateurs':'Users',
+    'Nouvelle commande':'New order','En traitement':'In progress','Confirmation en attente':'Waiting for confirmation','Ready to print':'Ready to print','Send to print':'Send to print','Printed':'Printed','Nouvelle':'New',
+    'Tous les statuts':'All statuses','Tous les responsables':'All assignees','Rechercher dans le journal...':'Search activity...','Toutes les opérations':'All operations',
+    'Profils clients enregistrés':'Registered customer profiles','Nombre de commandes':'Number of orders','Commandes actuelles':'Current orders','Commandes terminées':'Completed orders','Dernière commande':'Latest order','Historique des commandes':'Order history',
+    'Nouveau client':'New client','Créer le client':'Create client','Nom du client':'Client name','Numéro de téléphone':'Phone number','Notes':'Notes','Créer la commande':'Create order','Nom de la commande':'Order name','Type de commande':'Order type',
+    'Enregistrer':'Save','Modifier':'Edit','Supprimer':'Delete','Annuler':'Cancel','Terminé':'Done','Langue':'Language','Choisissez la langue de l’interface.':'Choose the interface language.','Personnalisez votre espace de travail.':'Customize your workspace.','La langue sélectionnée est mémorisée sur cet appareil.':'Your selected language is saved on this device.',
+    'Français':'French','العربية':'Arabic','English':'English','Se connecter':'Sign in','Mot de passe':'Password','Email':'Email','Connexion…':'Signing in…',
+    'Journal des activités':'Activity log','Historique des opérations effectuées dans Printelly Dz':'History of operations performed in Printelly Dz','Aucune opération trouvée.':'No activity found.','Chargement…':'Loading…',
+    'Utilisateurs Printly et rôles attribués.':'Printly users and assigned roles.','utilisateur(s)':'user(s)',
+    'Clients enregistrés manuellement pour les anciennes commandes.':'Customers manually registered for legacy orders.','+ Ajouter un client':'+ Add client','Aucun client Old School pour le moment.':'No legacy clients yet.','Fiche client':'Customer profile','Nom / Société':'Name / Company','Téléphone':'Phone','Adresse':'Address','Aucune adresse renseignée':'No address provided','Aucune note':'No notes','Client depuis':'Customer since','Type':'Type','Old School':'Legacy','Modifier le client Old School':'Edit legacy client','Nouveau client Old School':'New legacy client','Enregistrer les modifications':'Save changes',
+    'Responsable':'Assignee','Modifier le statut':'Change status','Historique des statuts':'Status history','Aucun changement enregistré.':'No changes recorded.','Supprimer la commande':'Delete order',
+    'Commande créée':'Order created','Statut modifié':'Status changed','Responsable modifié':'Assignee changed','Mètres modifiés':'Meters updated','Commande supprimée':'Order deleted',
+    'Commande':'Order','Créée le':'Created','Statut':'Status','Mètres client':'Customer meters','Mètres imprimés':'Printed meters',
+    'Client existant :':'Existing client:','son profil sera réutilisé.':'their profile will be reused.','Responsable automatique :':'Automatic assignee:','Combien de mètres a le client pour cette commande ?':'How many meters does the customer have for this order?','Combien de mètres ont réellement été imprimés ?':'How many meters were actually printed?','mètres':'meters','Enregistrer et changer le statut':'Save and change status'
+  }
+};
+const originalTextNodes=new WeakMap(),originalAttrs=new WeakMap();
+function localizePage(lang){
+  const dict=uiTranslations[lang]||{};
+  const root=document.body;
+  const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let n;
+  while(n=walk.nextNode()){
+    const raw=originalTextNodes.get(n)??n.nodeValue;
+    if(!originalTextNodes.has(n))originalTextNodes.set(n,raw);
+    const key=raw.trim();
+    if(!key)continue;
+    const translated=dict[key];
+    if(translated!==undefined)n.nodeValue=raw.replace(key,translated);
+    else if(lang==='fr')n.nodeValue=raw;
+  }
+  root.querySelectorAll('input,textarea,button,select,[aria-label],[title]').forEach(el=>{
+    ['placeholder','aria-label','title'].forEach(attr=>{
+      const raw=originalAttrs.get(el)?.[attr]??el.getAttribute(attr);
+      if(raw==null)return;
+      if(!originalAttrs.has(el))originalAttrs.set(el,{});
+      originalAttrs.get(el)[attr]=raw;
+      const translated=dict[raw];
+      if(translated!==undefined)el.setAttribute(attr,translated);
+      else if(lang==='fr')el.setAttribute(attr,raw);
+    });
+  });
+}
+
 const actionLabel={order_created:'Commande créée',status_changed:'Statut modifié',responsible_changed:'Responsable modifié',meters_updated:'Mètres modifiés',order_deleted:'Commande supprimée'};
 
 const Icon=({name,size=21})=>{const p={width:size,height:size,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor',strokeWidth:'1.8',strokeLinecap:'round',strokeLinejoin:'round'};const paths={menu:<><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></>,orders:<><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></>,users:<><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M17 11a4 4 0 0 0 0-8"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></>,journal:<><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,team:<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>,box:<><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></>,settings:<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.42 1.42-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20h-2v-.09a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.42-1.42.06-.06A1.7 1.7 0 0 0 9.4 15a1.7 1.7 0 0 0-1.56-1.03H7v-2h.84A1.7 1.7 0 0 0 9.4 10.4a1.7 1.7 0 0 0-.34-1.88L9 8.46l1.42-1.42.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 13.4 5.9V5h2v.9a1.7 1.7 0 0 0 1.03 1.54 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.42 1.42-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.9 11H21v2h-.1A1.7 1.7 0 0 0 19.4 15Z"/></>};return <svg {...p}>{paths[name]||paths.menu}</svg>};
@@ -23,7 +88,7 @@ const Icon=({name,size=21})=>{const p={width:size,height:size,viewBox:'0 0 24 24
 function App(){
  const [session,setSession]=useState(null),[profile,setProfile]=useState(null),[page,setPage]=useState('dashboard'),[orders,setOrders]=useState([]),[customers,setCustomers]=useState([]),[profiles,setProfiles]=useState([]),[loading,setLoading]=useState(true),[error,setError]=useState(''),[drawer,setDrawer]=useState(false),[chatOpen,setChatOpen]=useState(false),[settingsOpen,setSettingsOpen]=useState(false),[language,setLanguage]=useState(localStorage.getItem('printly-language')||'fr');
  useEffect(()=>{const saved=localStorage.getItem('printly-page');if(saved)setPage(saved);supabase.auth.getSession().then(({data})=>{setSession(data.session);if(data.session)load(data.session.user.id,true);else setLoading(false)});const {data:{subscription}}=supabase.auth.onAuthStateChange((_e,s)=>{setSession(s);if(s)load(s.user.id,true);else{setProfile(null);setLoading(false)}});return()=>subscription.unsubscribe()},[]);
- useEffect(()=>{if(session&&page)localStorage.setItem('printly-page',page)},[page,session]);
+ useEffect(()=>{if(session&&page)localStorage.setItem('printly-page',page)},[page,session]);\n useEffect(()=>{document.documentElement.lang=language;document.documentElement.dir=language==='ar'?'rtl':'ltr';const apply=()=>localizePage(language);const observer=new MutationObserver(apply);apply();observer.observe(document.body,{childList:true,subtree:true,characterData:true});return()=>observer.disconnect()},[language]);
  async function load(uid,showLoading=false){if(showLoading)setLoading(true);const [{data:p},{data:o},{data:c},{data:ps}]=await Promise.all([supabase.from('profiles').select('*').eq('id',uid).single(),supabase.from('orders').select('*,customers(full_name,phone),profiles:responsible_id(full_name),sent_profile:sent_to_print_by(full_name),printed_profile:printed_by(full_name)').order('created_at',{ascending:false}),supabase.from('customers').select('*').order('created_at',{ascending:false}),supabase.from('profiles').select('*').order('created_at')]);setProfile(p);setOrders(o||[]);setCustomers(c||[]);setProfiles(ps||[]);if(showLoading)setLoading(false)}
  if(!session)return <Login onError={setError}/>;if(loading)return <div className="center">Loading…</div>;
  const go=p=>{setPage(p);setDrawer(false)};
@@ -34,7 +99,7 @@ function App(){
   <main>{error&&<div className="error">{error}<button onClick={()=>setError('')}>×</button></div>}{page==='dashboard'?<Dashboard orders={orders} customers={customers} profiles={profiles} me={profile} reload={()=>load(session.user.id,false)} setError={setError}/>:page==='customers'?<Customers customers={customers} orders={orders} me={profile} reload={()=>load(session.user.id,false)} setError={setError}/>:page==='activity'?<Activity profiles={profiles} orders={orders}/>:page==='old_school'?<OldSchool customers={customers} me={profile} reload={()=>load(session.user.id,false)} setError={setError}/>:<Users profiles={profiles} setError={setError} reload={()=>load(session.user.id,false)}/>}</main>
  </div>
 }
-function SettingsModal({language,setLanguage,onClose}){const apply=v=>{setLanguage(v);document.documentElement.lang=v;document.documentElement.dir=v==='ar'?'rtl':'ltr'};return <div className="modal settingsOverlay" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}><div className="settingsCard"><div className="modalHead"><div><span className="settingsEyebrow">Printelly Dz</span><h2>Paramètres</h2><p>Personnalisez votre espace de travail.</p></div><button onClick={onClose}>×</button></div><div className="settingsSection"><div><b>Langue</b><small>Choisissez la langue de l’interface.</small></div><div className="languageGrid"><button type="button" className={language==='fr'?'active':''} onClick={()=>apply('fr')}><span>🇫🇷</span><div><b>Français</b><small>Français</small></div></button><button type="button" className={language==='ar'?'active':''} onClick={()=>apply('ar')}><span>🇩🇿</span><div><b>العربية</b><small>العربية</small></div></button><button type="button" className={language==='en'?'active':''} onClick={()=>apply('en')}><span>🇬🇧</span><div><b>English</b><small>English</small></div></button></div></div><div className="settingsFooter"><span>La langue sélectionnée est mémorisée sur cet appareil.</span><button className="primary" onClick={onClose}>Terminé</button></div></div></div>}
+function SettingsModal({language,setLanguage,onClose}){const apply=v=>{setLanguage(v);localStorage.setItem('printly-language',v);document.documentElement.lang=v;document.documentElement.dir=v==='ar'?'rtl':'ltr'};return <div className="modal settingsOverlay" onMouseDown={e=>{if(e.target===e.currentTarget)onClose()}}><div className="settingsCard"><div className="modalHead"><div><span className="settingsEyebrow">Printelly Dz</span><h2>Paramètres</h2><p>Personnalisez votre espace de travail.</p></div><button onClick={onClose}>×</button></div><div className="settingsSection"><div><b>Langue</b><small>Choisissez la langue de l’interface.</small></div><div className="languageGrid"><button type="button" className={language==='fr'?'active':''} onClick={()=>apply('fr')}><span>🇫🇷</span><div><b>Français</b><small>Français</small></div></button><button type="button" className={language==='ar'?'active':''} onClick={()=>apply('ar')}><span>🇩🇿</span><div><b>العربية</b><small>العربية</small></div></button><button type="button" className={language==='en'?'active':''} onClick={()=>apply('en')}><span>🇬🇧</span><div><b>English</b><small>English</small></div></button></div></div><div className="settingsFooter"><span>La langue sélectionnée est mémorisée sur cet appareil.</span><button className="primary" onClick={onClose}>Terminé</button></div></div></div>}
 function Login({onError}){const[email,setEmail]=useState(''),[password,setPassword]=useState(''),[busy,setBusy]=useState(false);async function go(e){e.preventDefault();setBusy(true);onError('');const {error}=await supabase.auth.signInWithPassword({email,password});if(error)onError(error.message);setBusy(false)}return <div className="login"><div className="loginCard"><h1>Printelly Dz</h1><p>DTF / UV Order Manager</p><form onSubmit={go}><input type="email" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required/><input type="password" placeholder="Mot de passe" value={password} onChange={e=>setPassword(e.target.value)} required/><button disabled={busy}>{busy?'Connexion…':'Se connecter'}</button></form></div></div>}
 
 function Dashboard({orders,customers,profiles,me,reload,setError}){
