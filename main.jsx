@@ -18,7 +18,7 @@ const statusLabel=s=>statuses.find(x=>x[0]===s)?.[1]||s||'—';
 const fmtDate=d=>d?new Date(d).toLocaleString('fr-FR',{dateStyle:'medium',timeStyle:'short'}):'—';
 const uiTranslations={
   ar:{
-    'Commandes':'الطلبات','Clients':'العملاء','Journal':'السجل','Old School':'العملاء القدامى','Paramètres':'الإعدادات','Équipe':'الفريق','Stock & Produits':'المخزون والمنتجات','Déconnexion':'تسجيل الخروج','Team Chat':'دردشة الفريق',
+    'Commandes':'الطلبات','Clients':'العملاء','Classement':'التصنيف','Plus de métrage':'أكثر متراً','Total des mètres commandés':'إجمالي الأمتار المطلوبة','Plus de commandes':'أكثر طلبات','Nombre total de commandes':'إجمالي عدد الطلبات','Classement par métrage':'التصنيف حسب المتر','Classement par commandes':'التصنيف حسب الطلبات','Mètres':'الأمتار','Aucun client avec des commandes pour le moment.':'لا يوجد عملاء لديهم طلبات حالياً.','Les meilleurs clients selon leur activité et leur métrage.':'أفضل العملاء حسب نشاطهم وإجمالي المتر.','Journal':'السجل','Old School':'العملاء القدامى','Paramètres':'الإعدادات','Équipe':'الفريق','Stock & Produits':'المخزون والمنتجات','Déconnexion':'تسجيل الخروج','Team Chat':'دردشة الفريق',
     'Rechercher client, téléphone, commande...':'البحث عن عميل، هاتف، طلب...','Dashboard':'لوحة التحكم','Utilisateurs':'المستخدمون',
     'Nouvelle commande':'طلب جديد','En traitement':'قيد المعالجة','Confirmation en attente':'في انتظار التأكيد','Ready to print':'جاهز للطباعة','Send to print':'إرسال للطباعة','Printed':'تمت الطباعة','Nouvelle':'جديد',
     'Tous les statuts':'كل الحالات','Tous les responsables':'كل المسؤولين','Commandes':'الطلبات','Rechercher dans le journal...':'البحث في السجل...','Toutes les opérations':'كل العمليات',
@@ -36,7 +36,7 @@ const uiTranslations={
     'Responsable automatique :':'المسؤول تلقائياً:','Combien de mètres a le client pour cette commande ?':'كم عدد الأمتار الخاصة بالعميل لهذا الطلب؟','Combien de mètres ont réellement été imprimés ?':'كم عدد الأمتار التي تمت طباعتها فعلياً؟','mètres':'أمتار','Enregistrer et changer le statut':'حفظ وتغيير الحالة'
   },
   en:{
-    'Commandes':'Orders','Clients':'Clients','Journal':'Activity','Old School':'Legacy Clients','Paramètres':'Settings','Équipe':'Team','Stock & Produits':'Stock & Products','Déconnexion':'Log out','Team Chat':'Team Chat',
+    'Commandes':'Orders','Clients':'Clients','Classement':'Ranking','Plus de métrage':'Most meters','Total des mètres commandés':'Total ordered meters','Plus de commandes':'Most orders','Nombre total de commandes':'Total number of orders','Classement par métrage':'Ranking by meters','Classement par commandes':'Ranking by orders','Mètres':'Meters','Aucun client avec des commandes pour le moment.':'No customers with orders yet.','Les meilleurs clients selon leur activité et leur métrage.':'Top customers by activity and total meters.','Journal':'Activity','Old School':'Legacy Clients','Paramètres':'Settings','Équipe':'Team','Stock & Produits':'Stock & Products','Déconnexion':'Log out','Team Chat':'Team Chat',
     'Rechercher client, téléphone, commande...':'Search client, phone, order...','Dashboard':'Dashboard','Utilisateurs':'Users',
     'Nouvelle commande':'New order','En traitement':'In progress','Confirmation en attente':'Waiting for confirmation','Ready to print':'Ready to print','Send to print':'Send to print','Printed':'Printed','Nouvelle':'New',
     'Tous les statuts':'All statuses','Tous les responsables':'All assignees','Rechercher dans le journal...':'Search activity...','Toutes les opérations':'All operations',
