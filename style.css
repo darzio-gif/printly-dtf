@@ -448,3 +448,82 @@ body:before{
   color:#fff!important;
   border-color:#111!important;
 }
+
+
+/* ===== Printly — clean white-first monochrome finish ===== */
+html,body,#root{background:#fff!important;color:#161616!important}
+body{background:#fff!important}
+body:before{background:none!important}
+
+/* White is the dominant surface; black is reserved for actions and emphasis. */
+.app header,.sidebar{background:#fff!important}
+.app header{border-bottom:1px solid #ededed!important;box-shadow:0 5px 22px rgba(0,0,0,.025)!important}
+.sidebar{border-inline-end:1px solid #ededed!important;box-shadow:4px 0 22px rgba(0,0,0,.025)!important}
+.sidebarBrand{border-bottom-color:#efefef!important}
+
+.headerSearch,.hamburger,.logoutTop,.sideProfile,.sideLogout,
+.sectionTab,.filters input,.filters select,.stat,.card,.customer,.userRow,
+.info,.customerOrders button,.typeBtn,.modalCard,.detailCard,.loginCard,
+.settingsCard,.settingsSection,.languageGrid button,.oldSchoolCard,
+.oldCustomerPicker select,.teamChatWindow{background:#fff!important}
+
+.sideNav button,.sideExtra,.sideLogout{color:#6f6f6f!important}
+.sideNav button:hover,.sideExtra:hover{background:#f7f7f7!important;color:#161616!important}
+.sideNav button.active{background:#f3f3f3!important;border-color:#e4e4e4!important;color:#161616!important}
+.sideNav button.active .bi{color:#161616!important}
+
+.top p,.stat span,.customer div,.customer small,.responsible,.meter,
+.modalHead p,.auto,.chatTime,.roomCopy small,.conversationIdentity small{color:#777!important}
+
+.primary,.colHead b{background:#171717!important;border-color:#171717!important;color:#fff!important;box-shadow:none!important}
+.primary:hover{background:#000!important}
+
+.sectionTab{border-color:#e8e8e8!important;color:#777!important}
+.sectionTab.active,.sectionTab.active.uv{background:#f4f4f4!important;border-color:#d9d9d9!important;color:#171717!important}
+.sectionTab b,.colHead span{background:#f3f3f3!important;color:#333!important;border-color:#e7e7e7!important}
+
+.filters input,.filters select,.modalCard input,.modalCard select,.modalCard textarea,
+.detailStatus select,.statusSelect,.loginCard input{border-color:#e6e6e6!important;color:#171717!important}
+.filters input:focus,.filters select:focus,.modalCard input:focus,.modalCard select:focus,
+.modalCard textarea:focus{border-color:#222!important}
+
+.stat,.card,.customer,.userRow,.info,.oldSchoolCard{border-color:#e9e9e9!important;box-shadow:0 5px 18px rgba(0,0,0,.025)!important}
+.card:hover,.customer:hover,.oldSchoolCard:hover{border-color:#d7d7d7!important;box-shadow:0 8px 24px rgba(0,0,0,.045)!important}
+.kanban .column,.mobileColumn{background:#fafafa!important;border-color:#e8e8e8!important;box-shadow:none!important}
+
+.sideAvatar,.avatar{background:#f1f1f1!important;color:#171717!important}
+.pill,.pill.uv{background:#171717!important;color:#fff!important}
+.historyDot{background:#171717!important;box-shadow:none!important}
+
+.modal{background:rgba(255,255,255,.82)!important}
+.modalCard,.detailCard{border-color:#dedede!important;box-shadow:0 20px 60px rgba(0,0,0,.10)!important}
+
+.login{background:#fff!important}
+.logoBig{background:#171717!important;box-shadow:none!important}
+.loginCard button{background:#171717!important;color:#fff!important}
+
+.chatHeaderButton,.chatSideButton{background:#fff!important;color:#171717!important;border-color:#e6e6e6!important}
+.teamChatOverlay{background:rgba(0,0,0,.20)!important}
+.teamChatWindow{border-color:#e0e0e0!important;box-shadow:0 24px 70px rgba(0,0,0,.12)!important}
+.teamChatRooms{background:#fafafa!important;border-right-color:#e8e8e8!important}
+.teamChatRoom:hover{background:#f3f3f3!important}
+.teamChatRoom.active{background:#ededed!important;border-color:#ddd!important}
+.chatAvatar{background:#f1f1f1!important;color:#171717!important;border-color:#e1e1e1!important}
+.chatAvatar.general,.teamChatLogo{background:#171717!important;color:#fff!important;border-color:#171717!important}
+.chatBubble{background:#f5f5f5!important;color:#171717!important;border-color:#e7e7e7!important}
+.chatMessageRow.own .chatBubble{background:#171717!important;color:#fff!important;border-color:#171717!important}
+.teamChatComposer{background:#fafafa!important}
+.chatSend{background:#171717!important}
+
+.settingsCard,.settingsSection,.languageGrid button,.oldCustomerPicker{border-color:#e5e5e5!important}
+.settingsSection{background:#fafafa!important}
+.languageGrid button:hover,.languageGrid button.active{background:#f1f1f1!important;border-color:#cfcfcf!important}
+.settingsEyebrow{color:#171717!important}
+.oldSchoolAvatar{background:#f1f1f1!important;color:#333!important}
+.oldSchoolIcon{color:#555!important}
+
+.emptyState{border-color:#ddd!important}
+.dangerButton,.cardDelete,.printlyDeleteBtn{background:#fff!important;color:#222!important;border-color:#ddd!important}
+.dangerButton:hover,.cardDelete:hover,.printlyDeleteBtn:hover{background:#171717!important;color:#fff!important;border-color:#171717!important}
+
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #171717!important}
