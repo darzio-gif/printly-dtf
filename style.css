@@ -122,3 +122,329 @@ main{width:100%;max-width:1800px;margin:0 auto;padding:calc(var(--header) + 30px
 .modalActions button:hover{background:rgba(255,255,255,.09)}
 .modalActions .danger{border-color:rgba(255,23,48,.35);background:rgba(255,23,48,.10);color:#ff5a69}
 @media(max-width:560px){.customerDetailGrid{grid-template-columns:1fr}.customerDetailGrid>div.wide{grid-column:auto}.modalActions{flex-direction:column}}
+
+
+/* ===== Printelly Dz — White / Black minimal theme ===== */
+:root{
+  --bg:#ffffff;
+  --glass:rgba(255,255,255,.94);
+  --line:#e9e9e9;
+  --line2:#d9d9d9;
+  --text:#111111;
+  --muted:#777777;
+  --red:#111111;
+  --redsoft:rgba(17,17,17,.06);
+  --purple:#111111;
+  --shadow:0 18px 50px rgba(0,0,0,.07);
+  color-scheme:light;
+}
+body{
+  background:#fff;
+  color:#111;
+}
+body:before{
+  background:linear-gradient(120deg,rgba(0,0,0,.015),transparent 40%);
+}
+.app header{
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid #ededed;
+  box-shadow:0 8px 30px rgba(0,0,0,.035);
+}
+.hamburger,.headerSearch,.logoutTop{
+  background:#fff;
+  border-color:#e5e5e5;
+  color:#111;
+}
+.headerSearch input{color:#111}
+.headerSearch{color:#777}
+.sidebar{
+  background:rgba(255,255,255,.97);
+  border-inline-end:1px solid #ededed;
+  box-shadow:10px 0 35px rgba(0,0,0,.035);
+}
+.sidebarBrand{border-bottom-color:#ededed}
+.sideNav button,.sideExtra,.sideLogout{color:#666}
+.sideNav button:hover,.sideExtra:hover{
+  background:#f6f6f6;
+  color:#111;
+}
+.sideNav button.active{
+  color:#111;
+  background:#f1f1f1;
+  border-color:#dedede;
+}
+.sideNav button.active .bi{color:#111}
+.sideProfile{
+  background:#fafafa;
+  border-color:#e5e5e5;
+}
+.sideAvatar,.avatar{
+  background:#111;
+  color:#fff;
+}
+.sideProfile small,.sideNav button small{color:#888}
+.sideLogout{background:#fff;border-color:#e5e5e5}
+.sideLogout:hover{background:#f4f4f4;border-color:#d7d7d7}
+
+.top p,.customer div,.responsible,.meter,.modalHead p{color:#777}
+.primary{
+  background:#111;
+  border-color:#111;
+  color:#fff;
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+.primary:hover{
+  background:#000;
+  box-shadow:0 12px 25px rgba(0,0,0,.16);
+}
+.orderSections .sectionTab,
+.sectionTab,
+.filters input,.filters select,
+.modalCard input,.modalCard select,.modalCard textarea,
+.detailStatus select,.statusSelect{
+  background:#fff;
+  color:#111;
+  border-color:#e3e3e3;
+}
+.sectionTab:hover{background:#fafafa}
+.sectionTab.active,
+.sectionTab.active.uv{
+  color:#111;
+  border-color:#cfcfcf;
+  background:#f3f3f3;
+}
+.sectionTab b{
+  background:#f1f1f1;
+  color:#222;
+}
+.filters input::placeholder,.modalCard input::placeholder,.modalCard textarea::placeholder{color:#999}
+.filters input:focus,.filters select:focus,.modalCard input:focus,
+.modalCard select:focus,.modalCard textarea:focus{
+  border-color:#111;
+  background:#fff;
+}
+
+.stat{
+  background:#fff;
+  border-color:#e8e8e8;
+  box-shadow:0 10px 28px rgba(0,0,0,.045);
+}
+.stat:before{background:radial-gradient(circle,rgba(0,0,0,.045),transparent 68%)}
+.stat strong{color:#111}
+.stat span{color:#777}
+
+.kanban .column,.mobileColumn{
+  background:#fafafa;
+  border-color:#e7e7e7;
+  box-shadow:none;
+}
+.colHead b{
+  background:#111;
+  color:#fff;
+  box-shadow:none;
+}
+.colHead span{
+  background:#fff;
+  color:#333;
+  border-color:#e2e2e2;
+}
+.card{
+  background:#fff;
+  border-color:#e7e7e7;
+  box-shadow:0 7px 22px rgba(0,0,0,.045);
+}
+.card:hover{
+  background:#fff;
+  border-color:#d2d2d2;
+  box-shadow:0 10px 28px rgba(0,0,0,.07);
+}
+.statusSelect{background:#f8f8f8}
+.clientBtn{color:#222}
+.clientBtn small{color:#888}
+.meter b{color:#111}
+
+.modal{
+  background:rgba(255,255,255,.72);
+}
+.modalCard,.detailCard{
+  background:rgba(255,255,255,.98);
+  border-color:#dedede;
+  box-shadow:0 24px 70px rgba(0,0,0,.13);
+}
+.modalHead button{
+  background:#fafafa;
+  border-color:#e2e2e2;
+  color:#111;
+}
+.typeBtn,.info,.customerOrders button,.userRow{
+  background:#fff;
+  border-color:#e5e5e5;
+  color:#111;
+}
+.typeBtn.active{
+  background:#f1f1f1;
+  border-color:#cfcfcf;
+  color:#111;
+}
+.auto,.found{color:#777}
+.found{
+  border-color:#ddd;
+  background:#f7f7f7;
+  color:#333;
+}
+.pill,.pill.uv{
+  background:#111;
+  color:#fff;
+}
+.history{border-top-color:#e5e5e5}
+.historyDot{
+  background:#111;
+  box-shadow:none;
+}
+.customer{
+  background:#fff;
+  border-color:#e5e5e5;
+  color:#111;
+}
+.customer:hover{border-color:#ccc;background:#fff}
+.customer small{color:#888}
+.customerOrders button:hover{background:#fafafa}
+.customerOrders small{color:#777}
+.userRow{background:#fff}
+
+.login{
+  background:#fff;
+}
+.loginCard{
+  background:#fff;
+  border-color:#e1e1e1;
+  box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+.logoBig{
+  background:#111;
+  box-shadow:none;
+}
+.loginCard input{
+  background:#fff;
+  color:#111;
+  border-color:#e1e1e1;
+}
+.loginCard button{
+  background:#111;
+  color:#fff;
+}
+.error{
+  border-color:#ddd;
+  background:#f7f7f7;
+  color:#222;
+}
+.center{background:#fff;color:#777}
+
+.chatHeaderButton,.chatSideButton{
+  background:#fff;
+  border-color:#e3e3e3;
+  color:#111;
+}
+.chatHeaderButton:hover{background:#f6f6f6;border-color:#d4d4d4}
+.chatSideButton:after{background:#111}
+.teamChatOverlay{background:rgba(0,0,0,.28)}
+.teamChatWindow{
+  background:#fff;
+  border-color:#ddd;
+  box-shadow:0 30px 80px rgba(0,0,0,.16);
+}
+.teamChatHeader,.teamChatConversationHead{
+  background:#fff;
+  border-bottom-color:#e8e8e8;
+}
+.teamChatRooms{
+  background:#fafafa;
+  border-right-color:#e8e8e8;
+}
+.teamChatRoom{color:#111}
+.teamChatRoom:hover{background:#f2f2f2}
+.teamChatRoom.active{background:#f0f0f0;border-color:#ddd}
+.chatAvatar{background:#f1f1f1;border-color:#ddd;color:#111}
+.chatAvatar.general,.teamChatLogo{
+  background:#111;
+  border-color:#111;
+  color:#fff;
+}
+.teamChatMemberPicker{
+  background:#fff;
+  border-color:#ddd;
+  box-shadow:0 20px 50px rgba(0,0,0,.14);
+}
+.teamChatMemberPicker button{color:#111}
+.teamChatMemberPicker button:hover{background:#f4f4f4}
+.teamChatConversation{background:#fff}
+.chatBubble{
+  background:#f5f5f5;
+  border-color:#e5e5e5;
+  color:#111;
+}
+.chatMessageRow.own .chatBubble{
+  background:#111;
+  border-color:#111;
+  color:#fff;
+}
+.chatComposerTools button,.chatComposerInput textarea{
+  background:#fff;
+  border-color:#e1e1e1;
+  color:#111;
+}
+.chatComposer select,.chatComposerTools select{background:#fff;color:#111}
+.chatSend{background:#111}
+.teamChatComposer{background:#fafafa;border-top-color:#e5e5e5}
+.chatOrderLink{background:#fafafa;border-color:#e5e5e5;color:#555}
+
+.settingsCard{
+  background:#fff;
+  border-color:#ddd;
+  box-shadow:0 24px 70px rgba(0,0,0,.12);
+}
+.settingsSection{
+  background:#fafafa;
+  border-color:#e5e5e5;
+}
+.languageGrid button{
+  background:#fff;
+  border-color:#e2e2e2;
+  color:#111;
+}
+.languageGrid button:hover,.languageGrid button.active{
+  border-color:#111;
+  background:#f2f2f2;
+}
+.settingsEyebrow{color:#111}
+.oldSchoolCard{
+  background:#fff;
+  border-color:#e5e5e5;
+}
+.oldSchoolCard:hover{border-color:#ccc;background:#fafafa}
+.oldSchoolAvatar{background:#f2f2f2;color:#111}
+.oldSchoolIcon{color:#555}
+.oldCustomerPicker{border-color:#ddd;background:#fafafa}
+.oldCustomerPicker label{color:#333}
+.oldCustomerPicker select{background:#fff;color:#111;border-color:#ddd}
+.emptyState{border-color:#ddd}
+
+.dangerZone{
+  border-color:#e5e5e5;
+  background:#fafafa;
+}
+.dangerButton{
+  border-color:#ccc!important;
+  background:#fff!important;
+  color:#111!important;
+}
+.cardDelete,.printlyDeleteBtn{
+  border-color:#ddd!important;
+  background:#fff!important;
+  color:#111!important;
+}
+.cardDelete:hover,.printlyDeleteBtn:hover{
+  background:#111!important;
+  color:#fff!important;
+  border-color:#111!important;
+}
