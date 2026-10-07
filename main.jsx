@@ -116,8 +116,10 @@ function App(){
    })
    .on('postgres_changes',{event:'UPDATE',schema:'public',table:'chat_room_members',filter:'user_id=eq.'+profile.id},()=>refresh())
    .subscribe();
+  const onChatRefresh=()=>refresh();
+  window.addEventListener('printly-chat-refresh',onChatRefresh);
   const timer=setInterval(refresh,30000);
-  return()=>{alive=false;clearInterval(timer);supabase.removeChannel(channel)};
+  return()=>{alive=false;clearInterval(timer);window.removeEventListener('printly-chat-refresh',onChatRefresh);supabase.removeChannel(channel)};
  },[profile?.id,chatOpen]);
  useEffect(()=>{if(chatOpen){const t=setTimeout(()=>window.dispatchEvent(new Event('printly-chat-refresh')),500);return()=>clearTimeout(t)}},[chatOpen]);
 
