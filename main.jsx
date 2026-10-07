@@ -2,6 +2,7 @@ import React,{useEffect,useMemo,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {createClient} from '@supabase/supabase-js';
 import './style.css';
+import './bon.css';
 import './activity.css';
 import TeamChat from './TeamChat.jsx';
 import FilmCalculator from './FilmCalculator.jsx';
