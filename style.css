@@ -558,3 +558,7 @@ main{contain:layout style;}
 @media (max-width:900px){
   .app header,.sidebar{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
 }
+
+.chatUnreadBadge{display:inline-flex!important;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;margin-left:auto;border-radius:999px;background:#ff1730;color:#fff!important;font:800 9px Montserrat,sans-serif;line-height:1;box-shadow:0 4px 12px rgba(255,23,48,.22);font-style:normal}
+.chatHeaderButton{position:relative}
+.chatHeaderButton .chatUnreadBadge{margin-left:2px}
