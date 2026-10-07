@@ -155,9 +155,9 @@ export default function TeamChat({me,profiles,orders,onClose}){
           </div>
         </aside>
         <section className="teamChatConversation">
-          {selectedRoom?<><div className="teamChatConversationHead"><button className="chatBackMobile" onClick={()=>setSelectedRoom(null)} aria-label="Retour">‹</button><div className="conversationIdentity"><span className={'chatAvatar '+(selectedRoom.type==='general'?'general':'')}>{selectedRoom.type==='general'?'👥':initials(selectedRoom.other?.full_name)}</span><div><strong>{selectedRoom.title}</strong><small>{selectedRoom.type==='general'?(selectedRoom.members?.length||0)+' membres':(roleLabels[selectedRoom.other?.role]||'Membre')}</small></div></div></div>
+          {selectedRoom?<><div className="teamChatConversationHead"><button className="chatBackMobile" onClick={()=>setSelectedRoom(null)} aria-label="Retour">‹</button><div className="conversationIdentity"><span className={'chatAvatar '+(selectedRoom.type==='general'?'general':'')}>{selectedRoom.type==='general'?<span className="uiIcon icon-users" aria-hidden="true"/>:initials(selectedRoom.other?.full_name)}</span><div><strong>{selectedRoom.title}</strong><small>{selectedRoom.type==='general'?(selectedRoom.members?.length||0)+' membres':(roleLabels[selectedRoom.other?.role]||'Membre')}</small></div></div></div>
           <div className="teamChatMessages">
-            {loadingMessages?<div className="chatEmpty">Chargement des messages…</div>:messages.length===0?<div className="chatWelcome"><div>💬</div><strong>Commencez la conversation</strong><span>Échangez avec l’équipe et partagez les informations des commandes.</span></div>:messages.map((m,i)=>{
+            {loadingMessages?<div className="chatEmpty">Chargement des messages…</div>:messages.length===0?<div className="chatWelcome"><div><span className="uiIcon icon-chat" aria-hidden="true"/></div><strong>Commencez la conversation</strong><span>Échangez avec l’équipe et partagez les informations des commandes.</span></div>:messages.map((m,i)=>{
               const own=m.sender_id===me.id;
               const previous=messages[i-1];
               const showDate=!previous||dayLabel(previous.created_at)!==dayLabel(m.created_at);
