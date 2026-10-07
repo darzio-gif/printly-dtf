@@ -531,3 +531,16 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 /* ===== Client Rankings ===== */
 .rankingPage{max-width:1100px}.rankingTabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.rankingTabs button{display:flex;align-items:center;gap:14px;min-height:82px;padding:14px 18px;border:1px solid #e7e7e7;border-radius:18px;background:#fff;color:#222;text-align:left;cursor:pointer;transition:.18s}.rankingTabs button:hover{border-color:#ccc;background:#fafafa}.rankingTabs button.active{border-color:#171717;background:#f3f3f3}.rankingTabs button>span{font-size:26px}.rankingTabs button div{display:flex;flex-direction:column;gap:4px}.rankingTabs button b{font:800 14px Manrope}.rankingTabs button small{color:#777;font-size:10px}.rankingCard{border:1px solid #e7e7e7;border-radius:22px;background:#fff;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.035)}.rankingHead{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid #eee}.rankingHead h3{margin:0;font:800 18px Manrope}.rankingHead p{margin:4px 0 0;color:#777;font-size:11px}.rankingHead>span{padding:7px 10px;border-radius:9px;background:#f2f2f2;color:#444;font-size:10px;font-weight:800}.rankingList{padding:8px}.rankingRow{display:grid;grid-template-columns:55px 44px 1fr auto;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid #f0f0f0}.rankingRow:last-child{border-bottom:0}.rankNumber{text-align:center;font-weight:800;font-size:14px}.rankAvatar{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#f1f1f1;color:#171717;font-weight:800}.rankClient{min-width:0}.rankClient b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rankClient small,.rankValue small{display:block;margin-top:4px;color:#777;font-size:10px}.rankValue{text-align:right;min-width:90px}.rankValue strong{font:800 16px Manrope;color:#171717}.rank-1{background:#fafafa;border-radius:14px}.rank-1 .rankAvatar{background:#171717;color:#fff}.rank-1 .rankValue strong{font-size:18px}.rankingNavIcon{width:21px;display:grid;place-items:center;font-size:17px}
 @media(max-width:767px){.rankingTabs{grid-template-columns:1fr}.rankingTabs button{min-height:70px}.rankingHead{padding:16px}.rankingRow{grid-template-columns:36px 40px 1fr auto;gap:9px;padding:11px 7px}.rankAvatar{width:38px;height:38px;border-radius:11px}.rankClient b{font-size:12px}.rankValue{min-width:68px}.rankValue strong{font-size:14px}.rankValue small{font-size:9px}}
+
+
+/* ===== Printly — white & black with a very small red accent ===== */
+:root{
+  --red:#c9152b;
+  --redsoft:rgba(201,21,43,.07);
+}
+.sideNav button.active .bi,
+.settingsEyebrow{color:var(--red)!important}
+.error{border-color:rgba(201,21,43,.18)!important;background:rgba(201,21,43,.045)!important}
+.dangerButton,.cardDelete,.printlyDeleteBtn{color:#b31328!important}
+.dangerButton:hover,.cardDelete:hover,.printlyDeleteBtn:hover{background:#c9152b!important;border-color:#c9152b!important;color:#fff!important}
+.statusBadge,.statusDot,.unreadBadge{background:#c9152b!important}
