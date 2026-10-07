@@ -544,3 +544,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .dangerButton,.cardDelete,.printlyDeleteBtn{color:#b31328!important}
 .dangerButton:hover,.cardDelete:hover,.printlyDeleteBtn:hover{background:#c9152b!important;border-color:#c9152b!important;color:#fff!important}
 .statusBadge,.statusDot,.unreadBadge{background:#c9152b!important}
+
+/* Performance layer: keep the UI native-like without expensive full-page effects. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+main{contain:layout style;}
+.kanban,.grid,.activityList,.oldSchoolGrid,.userList,.customerOrders{contain:layout paint;}
+.card,.customer,.activityRow,.oldSchoolCard,.userRow,.stat,.sectionTab{content-visibility:auto;contain-intrinsic-size:1px 120px;}
+@media (min-width:901px){
+  .app header,.sidebar{backdrop-filter:blur(18px) saturate(120%);-webkit-backdrop-filter:blur(18px) saturate(120%);}
+}
+@media (max-width:900px){
+  .app header,.sidebar{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+}
