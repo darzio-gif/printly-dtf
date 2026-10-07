@@ -562,3 +562,18 @@ main{contain:layout style;}
 .chatUnreadBadge{display:inline-flex!important;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;margin-left:auto;border-radius:999px;background:#ff1730;color:#fff!important;font:800 9px Montserrat,sans-serif;line-height:1;box-shadow:0 4px 12px rgba(255,23,48,.22);font-style:normal}
 .chatHeaderButton{position:relative}
 .chatHeaderButton .chatUnreadBadge{margin-left:2px}
+
+@media (max-width:767px){
+  /* Mobile modals must stay fully below the fixed app bar. */
+  .modal{
+    align-items:flex-start!important;
+    justify-items:center!important;
+    padding:calc(var(--header) + 12px) 10px 14px!important;
+    overflow-y:auto!important;
+  }
+  .modalCard,.detailCard{
+    max-height:calc(100dvh - var(--header) - 26px)!important;
+    margin:0!important;
+    overflow-y:auto!important;
+  }
+}
