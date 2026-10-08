@@ -1,5 +1,9 @@
 import React,{useMemo,useRef,useState} from 'react';
 import './gang-sheet.css';
+const OPENAI_KEY=import.meta.env.VITE_OPENAI_API_KEY;
+async function fileData(file){return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+async function openAIEdit(file,kind){if(!OPENAI_KEY)throw new Error('VITE_OPENAI_API_KEY is missing in Vercel.');const fd=new FormData();fd.append('model',import.meta.env.VITE_OPENAI_IMAGE_MODEL||'gpt-image-2');fd.append('image[]',file,file.name);fd.append('prompt',kind==='bg'?'Remove the background completely. Preserve the exact original artwork, text, logo, colors and proportions. Do not redesign or add elements. Return isolated artwork with transparent background for DTF printing.':'Upscale and enhance this artwork for high quality DTF printing. Preserve the exact original artwork, text, logo, colors and proportions. Do not redesign, add or remove elements. Improve edge clarity and return transparent PNG.');fd.append('background','transparent');fd.append('output_format','png');fd.append('quality','high');const r=await fetch('https://api.openai.com/v1/images/edits',{method:'POST',headers:{Authorization:'Bearer '+OPENAI_KEY},body:fd});const j=await r.json();if(!r.ok)throw new Error(j?.error?.message||'OpenAI image edit failed');const b=j?.data?.[0]?.b64_json;if(!b)throw new Error('OpenAI returned no image.');const blob=await (await fetch('data:image/png;base64,'+b)).blob();return new File([blob],file.name+'-'+kind+'.png',{type:'image/png'})}
+
 
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
 const uid=()=>Math.random().toString(36).slice(2,9);
@@ -22,12 +26,12 @@ function packItems(items, sheetW, sheetH, gap, margin, allowRotate){
 }
 
 export default function GangSheetBuilder(){
-  const [sheetW,setSheetW]=useState(58);
+  const [sheetW]=useState(58);
   const [sheetH,setSheetH]=useState(100);
   const [gap,setGap]=useState(0.3);
   const [margin,setMargin]=useState(0.5);
   const [allowRotate,setAllowRotate]=useState(true);
-  const [dpi,setDpi]=useState(150);
+  const [dpi]=useState(300);
   const [items,setItems]=useState([]);
   const [selected,setSelected]=useState(null);
   const [aiLoading,setAiLoading]=useState(false);
@@ -50,7 +54,7 @@ export default function GangSheetBuilder(){
         const ratio=img.width/img.height||1;
         const h=clamp(10,3,40);
         const w=clamp(h*ratio,3,55);
-        setItems(v=>[...v,{id:uid(),name:file.name.replace(/\.[^.]+$/,''),src:url,w:Number(w.toFixed(1)),h:Number(h.toFixed(1)),qty:1,originalW:img.width,originalH:img.height}]);
+        setItems(v=>[...v,{id:uid(),name:file.name.replace(/\.[^.]+$/,''),file,src:url,w:Number(w.toFixed(1)),h:Number(h.toFixed(1)),qty:1,originalW:img.width,originalH:img.height}]);
       };
       img.src=url;
     });
@@ -82,28 +86,10 @@ export default function GangSheetBuilder(){
 
   async function exportTiff(){if(!items.length){setAiMessage('Ajoutez au moins un design avant l’export.');return}setAiLoading(true);setAiMessage('Création du TIFF CMYK 300 DPI…');try{const images={};for(const x of items)images[x.id]=await fileData(x.file);const payload={width:58,height:sheetH,dpi:300,gap,margin,items:result.placed.map(p=>({id:p.id,x:p.x,y:p.y,w:p.w,h:p.h,rotated:p.rotated})),images};const r=await fetch('/api/gang-sheet-export',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error(await r.text());const blob=await r.blob(),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='printly-gang-sheet-58x'+sheetH+'cm-300dpi-CMYK.tiff';a.click();setAiMessage('TIFF exported: CMYK · 300 DPI · 58 cm.')}catch(e){setAiMessage(e.message||'Export failed.')}finally{setAiLoading(false)}}
   async function processImage(id,kind){const item=items.find(x=>x.id===id);if(!item)return;setAiLoading(true);try{const f=await openAIEdit(item.file,kind),z=await new Promise((res,rej)=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>res({src:u,w:im.width,h:im.height});im.onerror=rej;im.src=u});setItems(v=>v.map(x=>x.id===id?{...x,file:f,src:z.src,originalW:z.w,originalH:z.h}:x));setAiMessage(kind==='bg'?'Background removed successfully.':'Upscale completed successfully.')}catch(e){setAiMessage(e.message||'AI processing failed.')}finally{setAiLoading(false)}}
-  async function aiOptimize(){
-    if(!items.length){setAiMessage('Ajoutez au moins un design avant l’optimisation IA.');return}
-    setAiLoading(true);setAiMessage('');
-    try{
-      const r=await fetch('/api/gang-sheet-ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-        sheet:{width:sheetW,height:sheetH,gap,margin},items:items.map(x=>({name:x.name,width:x.w,height:x.h,quantity:x.qty}))
-      })});
-      const data=await r.json();
-      if(!r.ok)throw new Error(data.error||'Erreur IA');
-      if(data.width)setSheetW(Number(data.width));
-      if(data.height)setSheetH(Number(data.height));
-      if(data.gap!=null)setGap(Number(data.gap));
-      if(data.margin!=null)setMargin(Number(data.margin));
-      setAiMessage(data.explanation||'Optimisation appliquée.');
-    }catch(e){setAiMessage(e.message||'Impossible de contacter l’IA. Vérifiez OPENAI_API_KEY sur Vercel.')}
-    finally{setAiLoading(false)}
-  }
-
   return <div className="gangPage">
     <div className="gangTop">
       <div><div className="gangEyebrow">PRINT PRODUCTION</div><h2>Gang Sheet Builder</h2><p>Composez automatiquement vos designs DTF sur un film optimisé.</p></div>
-      <div className="gangActions"><button className="secondaryBtn" onClick={()=>fileRef.current?.click()}>+ Ajouter des designs</button><button className="aiBtn" <button className="primary actionRed" onClick={exportTiff} disabled={!items.length||aiLoading}>{aiLoading?'Export…':'Exporter TIFF CMYK'</button></div>
+      <div className="gangActions"><button className="secondaryBtn" onClick={()=>fileRef.current?.click()}>+ Ajouter des designs</button>{aiLoading?'Export…':'Exporter TIFF CMYK'</button></div>
       <input ref={fileRef} hidden type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={e=>{addFiles(e.target.files);e.target.value=''}}/>
     </div>
 
@@ -135,7 +121,7 @@ export default function GangSheetBuilder(){
             <img src={x.src} alt=""/>
             <div className="designInfo"><b title={x.name}>{x.name}</b><small>{x.w} × {x.h} cm</small></div>
             <input className="qtyInput" type="number" min="1" value={x.qty} onClick={e=>e.stopPropagation()} onChange={e=>update(x.id,'qty',e.target.value)}/>
-            <div className="designAi"><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'bg')}}>Remove BG</button><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'up')}}>Upscale</button><button className="removeDesign" onClick={e=>{e.stopPropagation();remove(x.id)}}>×</button></div>
+            <div className="designAi"><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'bg')}}>Remove BG</button><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'up')}}>Upscale</button><div className="designAi"><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'bg')}}>Remove BG</button><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'up')}}>Upscale</button><button className="removeDesign" onClick={e=>{e.stopPropagation();remove(x.id)}}>×</button></div></div>
           </div>)}
         </div>
       </section>
