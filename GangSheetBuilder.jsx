@@ -60,9 +60,7 @@ export default function GangSheetBuilder(){
     });
   }
 
-  function update(id,key,value){
-    setItems(v=>v.map(x=>x.id===id?{...x,[key:key==='qty'?Math.max(1,Number(value)||1):Math.max(.1,Number(value)||.1)}:x));
-  }
+  function update(id,key,value){setItems(v=>v.map(x=>x.id===id?{...x,[key]:key==='qty'?Math.max(1,Number(value)||1):Math.max(.1,Number(value)||.1)}:x));}
   function remove(id){setItems(v=>v.filter(x=>x.id!==id));if(selected===id)setSelected(null)}
   function clearAll(){items.forEach(x=>URL.revokeObjectURL(x.src));setItems([]);setSelected(null);setAiMessage('')}
 
