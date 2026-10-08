@@ -80,12 +80,8 @@ export default function GangSheetBuilder(){
     return {canvas,W,H};
   }
 
-  function exportPng(){
-    const {canvas}=drawCanvas(true);
-    // Images load asynchronously; wait a moment before exporting.
-    setTimeout(()=>{const a=document.createElement('a');a.download=`printly-gang-sheet-${sheetW}x${sheetH}cm.png`;a.href=canvas.toDataURL('image/png');a.click()},500);
-  }
-
+  async function exportTiff(){if(!items.length){setAiMessage('Ajoutez au moins un design avant l’export.');return}setAiLoading(true);setAiMessage('Création du TIFF CMYK 300 DPI…');try{const images={};for(const x of items)images[x.id]=await fileData(x.file);const payload={width:58,height:sheetH,dpi:300,gap,margin,items:result.placed.map(p=>({id:p.id,x:p.x,y:p.y,w:p.w,h:p.h,rotated:p.rotated})),images};const r=await fetch('/api/gang-sheet-export',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error(await r.text());const blob=await r.blob(),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='printly-gang-sheet-58x'+sheetH+'cm-300dpi-CMYK.tiff';a.click();setAiMessage('TIFF exported: CMYK · 300 DPI · 58 cm.')}catch(e){setAiMessage(e.message||'Export failed.')}finally{setAiLoading(false)}}
+  async function processImage(id,kind){const item=items.find(x=>x.id===id);if(!item)return;setAiLoading(true);try{const f=await openAIEdit(item.file,kind),z=await new Promise((res,rej)=>{const u=URL.createObjectURL(f),im=new Image();im.onload=()=>res({src:u,w:im.width,h:im.height});im.onerror=rej;im.src=u});setItems(v=>v.map(x=>x.id===id?{...x,file:f,src:z.src,originalW:z.w,originalH:z.h}:x));setAiMessage(kind==='bg'?'Background removed successfully.':'Upscale completed successfully.')}catch(e){setAiMessage(e.message||'AI processing failed.')}finally{setAiLoading(false)}}
   async function aiOptimize(){
     if(!items.length){setAiMessage('Ajoutez au moins un design avant l’optimisation IA.');return}
     setAiLoading(true);setAiMessage('');
@@ -107,7 +103,7 @@ export default function GangSheetBuilder(){
   return <div className="gangPage">
     <div className="gangTop">
       <div><div className="gangEyebrow">PRINT PRODUCTION</div><h2>Gang Sheet Builder</h2><p>Composez automatiquement vos designs DTF sur un film optimisé.</p></div>
-      <div className="gangActions"><button className="secondaryBtn" onClick={()=>fileRef.current?.click()}>+ Ajouter des designs</button><button className="aiBtn" onClick={aiOptimize} disabled={aiLoading}>{aiLoading?'Analyse…':'✦ AI Optimize'}</button><button className="primary actionRed" onClick={exportPng} disabled={!items.length}>Exporter PNG</button></div>
+      <div className="gangActions"><button className="secondaryBtn" onClick={()=>fileRef.current?.click()}>+ Ajouter des designs</button><button className="aiBtn" <button className="primary actionRed" onClick={exportTiff} disabled={!items.length||aiLoading}>{aiLoading?'Export…':'Exporter TIFF CMYK'</button></div>
       <input ref={fileRef} hidden type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={e=>{addFiles(e.target.files);e.target.value=''}}/>
     </div>
 
@@ -124,11 +120,11 @@ export default function GangSheetBuilder(){
       <section className="gangPanel gangControls">
         <div className="panelTitle"><div><h3>Configuration</h3><small>FILM & ESPACEMENT</small></div></div>
         <div className="gangGrid">
-          <label>Largeur du film (cm)<input type="number" min="10" max="200" step=".1" value={sheetW} onChange={e=>setSheetW(Number(e.target.value)||1)}/></label>
+          <label>Largeur du film (cm)<input type="number" min="10" max="200" step=".1" value={58} disabled/></label>
           <label>Longueur du film (cm)<input type="number" min="10" max="1000" step=".1" value={sheetH} onChange={e=>setSheetH(Number(e.target.value)||1)}/></label>
           <label>Espacement (cm)<input type="number" min="0" max="10" step=".1" value={gap} onChange={e=>setGap(Number(e.target.value)||0)}/></label>
           <label>Marge (cm)<input type="number" min="0" max="10" step=".1" value={margin} onChange={e=>setMargin(Number(e.target.value)||0)}/></label>
-          <label>Export DPI<select value={dpi} onChange={e=>setDpi(Number(e.target.value))}><option value="150">150 DPI — léger</option><option value="300">300 DPI — impression</option></select></label>
+          <label>Export DPI<input value="300" disabled/></label>
         </div>
         <label className="toggleRow"><input type="checkbox" checked={allowRotate} onChange={e=>setAllowRotate(e.target.checked)}/><span>Rotation automatique</span><small>Utiliser l’espace restant intelligemment</small></label>
 
@@ -139,7 +135,7 @@ export default function GangSheetBuilder(){
             <img src={x.src} alt=""/>
             <div className="designInfo"><b title={x.name}>{x.name}</b><small>{x.w} × {x.h} cm</small></div>
             <input className="qtyInput" type="number" min="1" value={x.qty} onClick={e=>e.stopPropagation()} onChange={e=>update(x.id,'qty',e.target.value)}/>
-            <button className="removeDesign" onClick={e=>{e.stopPropagation();remove(x.id)}}>×</button>
+            <div className="designAi"><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'bg')}}>Remove BG</button><button disabled={aiLoading} onClick={e=>{e.stopPropagation();processImage(x.id,'up')}}>Upscale</button><button className="removeDesign" onClick={e=>{e.stopPropagation();remove(x.id)}}>×</button></div>
           </div>)}
         </div>
       </section>
