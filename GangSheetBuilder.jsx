@@ -87,7 +87,7 @@ export default function GangSheetBuilder(){
   return <div className="gangPage">
     <div className="gangTop">
       <div><div className="gangEyebrow">PRINT PRODUCTION</div><h2>Gang Sheet Builder</h2><p>Composez automatiquement vos designs DTF sur un film optimisé.</p></div>
-      <div className="gangActions"><button className="secondaryBtn" onClick={()=>fileRef.current?.click()}>+ Ajouter des designs</button>{aiLoading?'Export…':'Exporter TIFF CMYK'</button></div>
+      <div className="gangActions"><button className="secondaryBtn" onClick={()=>fileRef.current?.click()}>+ Ajouter des designs</button><button className="primary actionRed" onClick={exportTiff} disabled={!items.length||aiLoading}>{aiLoading?'Export…':'Exporter TIFF CMYK'}</button></div>
       <input ref={fileRef} hidden type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={e=>{addFiles(e.target.files);e.target.value=''}}/>
     </div>
 
@@ -95,7 +95,7 @@ export default function GangSheetBuilder(){
       <div><span>Pièces</span><strong>{totalPieces}</strong></div>
       <div><span>Hauteur utilisée</span><strong>{usedHeight.toFixed(1)} cm</strong></div>
       <div><span>Surface utile</span><strong>{utilization}%</strong></div>
-      <div><span>Film</span><strong>{sheetW} × {sheetH} cm</strong></div>
+      <div><span>Film</span><strong>58 × {sheetH} cm</strong></div>
     </div>
 
     {aiMessage&&<div className="aiNotice"><span>✦</span>{aiMessage}</div>}
